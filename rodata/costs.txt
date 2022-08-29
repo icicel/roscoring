@@ -1,0 +1,14 @@
+set		hat					neck						face					shirt						back						pants
+marshall	l-red,3 l-purple,3 t-silver,2		l-green,4 l-blue,4 l-purple,4 t-silver,7	l-red,5 l-green,5 t-silver,4		l-blue,10 g-green,2 g-purple,1 t-silver,20	g-green,1 l-green,6 t-silver,10 l-purple,10	l-red,10 g-green,1 t-silver,15 g-purple,1
+musketeer	l-blue,3 t-gold,2 l-purple,3		l-blue,4 l-orange,4 t-gold,7 l-purple,4		l-blue,5 t-gold,4 l-green,5		l-green,10 g-green,1 t-gold,20 g-purple,2	l-purple,6 l-orange,10 t-gold,10 g-purple,1	l-blue,10 g-green,1 t-gold,15 g-purple,1
+rebel		l-red,3 t-brass,2 l-purple,3		t-brass,7 l-orange,4 l-blue,4 l-purple,4	l-red,5 t-brass,4 l-purple,5		g-orange,1 t-brass,20 g-purple,2		t-brass,10 l-purple,6 g-purple,1		g-orange,1 t-brass,15 g-purple,1
+l-rush		l-red,25 g-red,10			l-red,25 g-red,10				t-brass,10 g-red,5			t-gold,10 g-red,5				l-red,25 g-red,10				t-silver,10 g-red,5
+l-chill		l-blue,25 g-blue,10			l-blue,25 g-blue,10				t-brass,10 g-blue,5			t-gold,10 g-blue,5				l-blue,25 g-blue,10				t-silver,10 g-blue,5
+l-vibe		l-green,25 g-green,10			l-green,25 g-green,10				t-brass,10 g-green,5			t-gold,10 g-green,5				l-green,25 g-green,10				t-silver,10 g-green,5
+l-flow		l-purple,25 g-purple,10			l-purple,25 g-purple,10				t-brass,10 g-purple,5			t-gold,10 g-purple,5				l-purple,25 g-purple,10				t-silver,10 g-purple,5
+l-beat		l-orange,25 g-orange,10			l-orange,25 g-orange,10				t-brass,10 g-orange,5			t-gold,10 g-orange,5				l-orange,25 g-orange,10				t-silver,10 g-orange,5
+r-rush		l-red,5 m-red,5				l-red,5 m-red,5					l-red,5 m-red,5				l-red,5 m-red,5					l-red,5 m-red,5					l-red,5 m-red,5
+r-chill		l-blue,5 m-blue,5			l-blue,5 m-blue,5				l-blue,5 m-blue,5			l-blue,5 m-blue,5				l-blue,5 m-blue,5				l-blue,5 m-blue,5
+r-vibe		l-green,5 m-green,5			l-green,5 m-green,5				l-green,5 m-green,5			l-green,5 m-green,5				l-green,5 m-green,5				l-green,5 m-green,5
+r-flow		l-purple,5 m-purple,5			l-purple,5 m-purple,5				l-purple,5 m-purple,5			l-purple,5 m-purple,5				l-purple,5 m-purple,5				l-purple,5 m-purple,5
+r-beat		l-orange,5 m-orange,5			l-orange,5 m-orange,5				l-orange,5 m-orange,5			l-orange,5 m-orange,5				l-orange,5 m-orange,5				l-orange,5 m-orange,5

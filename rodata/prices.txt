@@ -1,0 +1,19 @@
+material	price (in coins)
+t-brass		1000
+t-silver	4000
+t-gold		1500
+g-red		900
+g-blue		800
+g-green		900
+g-purple	800
+g-orange	900
+l-red		100
+l-blue		100
+l-green		100
+l-purple	100
+l-orange	100
+m-red		25
+m-blue		25
+m-green		25
+m-purple	25
+m-orange	25
