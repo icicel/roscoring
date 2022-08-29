@@ -1,52 +1,6 @@
 from numpy.polynomial.polynomial import Polynomial as poly
 from datetime import datetime as dt
-
-# HIT - an action that increases score. single notes have one hit, long notes have two
-# NOTE - uh, one singular note? can be single or long
-# so basically, just count LNs twice for song hit count
-
-### GEAR POOL SETTINGS
-use_tutorial_gear = False # boomboxes
-use_shop_gear = False # onii, xsitsu, random, xana, goonie, kagan, koneko, mighty and gamer's sets, and guitars
-use_event_gear = False # gear that was introduced in events (ex. slynk, landino and kurante's sets)
-use_legendary_gear = False # marshall, musketeer and rebel's sets
-use_rare_color_gear = True
-use_legendary_color_gear = False
-
-### GEAR SETTINGS
-use_unobtainable_gear = True # will not ignore sets defined below
-unobtainable_sets = ["e-poppy"]
-upgrades_per_gear_set = 90 # 0 = no upgrades, 6 = 1 per slot, 30 = 5 per slot, 90 = 15 per slot etc.
-use_owned_gear = True # restricts selection to gear defined in owned.txt
-mini_level = 20 # rank is calculated automatically
-
-### PROGRAM SETTINGS
-new_algorithm = False # TODO: an alternative way...
-memory_saver = False # TODO: uses a modified method to create gear combinations in case you run into memory problems
-debug = False # prints debug info and quits
-timer = False # times the main loop
-
-### GAMEPLAY SETTINGS
-# percentage of hits that are Greats (the program assumes no Oks or Misses)
-# only values above 0.05 have a significant impact
-great_accuracy = 0
-perfect_accuracy = 1 - great_accuracy
-
-### SONG SETTINGS
-song_length = 135 # from first note to last note
-song_hit_count = 177 # Perfects + Greats
-song_ln_count = 10 # just count them manually lol
-song_note_count = song_hit_count - song_ln_count # aka tap count + ln count
-# here's some predefined songs for ya:
-# strawberry sherbet (easy) - length 135, hits 177, lns 10
-# be my time machine (hard) - length 127, hits 1502, lns 255
-
-### ALGORITHM SETTINGS
-smooth_fever_percentage = True # modified fever percentage formula
-formulaic_stats = True # fit a polynomial onto the stat data to get smoother values
-polynomial_degree = 8
-
-
+import settings
 
 ### PROCESS DATA
 
@@ -62,15 +16,15 @@ for gear_set in gear_input:
     lines = gear_set.split("\t")
     name = lines[0] if lines[0][:2] in ["r-", "l-", "b-", "g-"] else lines[0][2:]
     geartype = lines[0][:2]
-    if (((geartype == "r-" and use_rare_color_gear)
-    or (geartype == "l-" and use_legendary_color_gear)
-    or (geartype == "x-" and use_legendary_gear)
-    or (geartype == "b-" and use_tutorial_gear)
-    or (geartype == "s-" and use_shop_gear)
-    or (geartype == "g-" and use_shop_gear) # guitars
-    or (geartype == "e-" and use_event_gear))
-    and (name not in unobtainable_sets or use_unobtainable_gear))\
-    or use_owned_gear:
+    if (((geartype == "r-" and settings.use_rare_color_gear)
+    or (geartype == "l-" and settings.use_legendary_color_gear)
+    or (geartype == "x-" and settings.use_legendary_gear)
+    or (geartype == "b-" and settings.use_tutorial_gear)
+    or (geartype == "s-" and settings.use_shop_gear)
+    or (geartype == "g-" and settings.use_shop_gear) # guitars
+    or (geartype == "e-" and settings.use_event_gear))
+    and (name not in settings.unobtainable_sets or settings.use_unobtainable_gear))\
+    or settings.use_owned_gear:
         gears[name] = []
         for gear in lines[1:]:
             if gear: # can be empty line
@@ -110,7 +64,7 @@ for line in price_input:
 # create minis. all stats are for max level but since they scale slowly and linearly (?) it should hold for lower levels
 mini_input = open("rodata/minis.txt", "r").read().split("\n")[1:]
 minis = {}
-mini_level = 0 if mini_level < 0 else mini_level
+mini_level = 0 if settings.mini_level < 0 else settings.mini_level
 mini_level = 50 if mini_level > 50 else int(mini_level)
 for line in mini_input:
     line = [c for c in line.split("\t") if c]
@@ -135,7 +89,7 @@ for line in upgrade_input:
 upgrade_list = list(upgrades.keys())
 
 # create owned gear
-if use_owned_gear:
+if settings.use_owned_gear:
     owned_gears = {}
     for gear_set in gears:
         owned_gears[gear_set] = [None, None, None, None, None, None]
@@ -175,16 +129,16 @@ for line in stat_input:
     for r in line.split("\t"):  # remove empty columns (double tabs)
         if r: newline.append(r)
     stat_list.append([float(s) for s in newline])
-if formulaic_stats:
-    pp_coefs = poly.fit(range(81), [l[0] for l in stat_list], polynomial_degree).convert().coef
-    ff_coefs = poly.fit(range(81), [l[1] for l in stat_list], polynomial_degree).convert().coef
-    ft_coefs = poly.fit(range(81), [l[3] for l in stat_list], polynomial_degree).convert().coef
+if settings.formulaic_stats:
+    pp_coefs = poly.fit(range(81), [l[0] for l in stat_list], settings.polynomial_degree).convert().coef
+    ff_coefs = poly.fit(range(81), [l[1] for l in stat_list], settings.polynomial_degree).convert().coef
+    ft_coefs = poly.fit(range(81), [l[3] for l in stat_list], settings.polynomial_degree).convert().coef
 x = 0
 for line in stat_list:
-    if formulaic_stats: # for smooth increases in stats
-        pp = sum([pp_coefs[n] * x ** n for n in range(polynomial_degree + 1)])
-        ff = sum([ff_coefs[n] * x ** n for n in range(polynomial_degree + 1)])
-        ft = sum([ft_coefs[n] * x ** n for n in range(polynomial_degree + 1)])
+    if settings.formulaic_stats: # for smooth increases in stats
+        pp = sum([pp_coefs[n] * x ** n for n in range(settings.polynomial_degree + 1)])
+        ff = sum([ff_coefs[n] * x ** n for n in range(settings.polynomial_degree + 1)])
+        ft = sum([ft_coefs[n] * x ** n for n in range(settings.polynomial_degree + 1)])
         x += 1
     else: # by using the raw rounded values, there could be situations where stats seemingly don't increase when upgrading
         pp = float(line[0])
@@ -194,15 +148,15 @@ for line in stat_list:
     cm = float(line[4])
     # we can save time on a bunch of calculations by doing them outside the loop, here!
     # Average Accuracy Points = <Perfect Points> * Perfect Accuracy + 150 * Great Accuracy
-    stat_value["pp"].append(pp * perfect_accuracy + 150 * great_accuracy)
+    stat_value["pp"].append(pp * settings.perfect_accuracy + 150 * settings.great_accuracy)
     # Fever Fill Time = ( (Song Note Count / 3) / ((Perfect Accuracy + 0.5 * Great Accuracy) / <Fever Fill Rate>) ) / Song Hit Density
-    stat_value["ff"].append(((song_note_count / 3) / ((perfect_accuracy + 0.5 * great_accuracy) / ff)) / (song_hit_count / song_length))
+    stat_value["ff"].append(((settings.song_note_count / 3) / ((settings.perfect_accuracy + 0.5 * settings.great_accuracy) / ff)) / (settings.song_hit_count / settings.song_length))
     # this is just <Fever Multiplier> though
     stat_value["fm"].append(fm)
     # Effective Fever Time = Song Length * (<Fever Time> * 0.16/1.67 + 0.0435)
-    stat_value["ft"].append(song_length * (ft * 0.16/1.67 + 0.0435))
+    stat_value["ft"].append(settings.song_length * (ft * 0.16/1.67 + 0.0435))
     # Average Combo Multiplier = ( (49.5  + Song Hit Count) * (<Combo Multiplier> - 1) + Song Hit Count ) / Song Hit Count
-    stat_value["cm"].append(((49.5 + song_hit_count) * (cm - 1) + song_hit_count) / song_hit_count)
+    stat_value["cm"].append(((49.5 + settings.song_hit_count) * (cm - 1) + settings.song_hit_count) / settings.song_hit_count)
 
 # we calculate song fever percentage for all possible combinations of fever fill time and effective fever time beforehand
 # this way, we don't have to repeat the super-slow division operations (integer division?! yucky!!) 250k times
@@ -213,16 +167,16 @@ for ff in range(81):
         fever_fill_time = stat_value["ff"][ff]
         effective_fever_time = stat_value["ft"][ft]
         fever_cycle = fever_fill_time + effective_fever_time
-        if smooth_fever_percentage: # this alarmingly simple formula appears when song_length approaches infinity
-            song_fever_percentage = effective_fever_time / fever_cycle - 10 / song_length
+        if settings.smooth_fever_percentage: # this alarmingly simple formula appears when song_length approaches infinity
+            song_fever_percentage = effective_fever_time / fever_cycle - 10 / settings.song_length
             # i subtract 10/length to "de-idealize" the formula
         else:
-            cycle_count = song_length // fever_cycle
-            incomplete_cycle = song_length - fever_cycle * cycle_count  # song_length % fever_cycle
+            cycle_count = settings.song_length // fever_cycle
+            incomplete_cycle = settings.song_length - fever_cycle * cycle_count  # song_length % fever_cycle
             if incomplete_cycle > fever_fill_time:  # if the final fever cycle got into the "fever phase" (active fever when song finished)
-                song_fever_percentage = (effective_fever_time * cycle_count + incomplete_cycle - fever_fill_time) / song_length
+                song_fever_percentage = (effective_fever_time * cycle_count + incomplete_cycle - fever_fill_time) / settings.song_length
             else:
-                song_fever_percentage = effective_fever_time * cycle_count / song_length
+                song_fever_percentage = effective_fever_time * cycle_count / settings.song_length
         y.append(song_fever_percentage)
     fever_percentage_from_stats.append(y)
 
@@ -331,16 +285,16 @@ combinations_length = 1
 for slot in range(6):
     combinations_length *= len([gears[s][slot] for s in gears if gears[s][slot]])
 print("Gear combination count: " + str(combinations_length))
-if use_owned_gear:
+if settings.use_owned_gear:
     print("Predicted time per song color: " + prepare_time(230 * combinations_length) + " to " + prepare_time(260 * combinations_length))
     print("Predicted time total: " + prepare_time(25 * 230 * combinations_length) + " to " + prepare_time(25 * 260 * combinations_length))
 else:
     print("Predicted time per song color: " + prepare_time(2800 * combinations_length) + " to " + prepare_time(3100 * combinations_length))
     print("Predicted time total: " + prepare_time(25 * 2800 * combinations_length) + " to " + prepare_time(25 * 3100 * combinations_length))
-print("Base predicted score: " + str(int(base_score * song_hit_count)))
+print("Base predicted score: " + str(int(base_score * settings.song_hit_count)))
 print("Combining gear...")
 combinations = []
-if memory_saver:
+if settings.memory_saver:
     combinations_stats = []
     print("Predicted combination time: " + prepare_time(2500 * combinations_length) + " to " + prepare_time(2900 * combinations_length))
     now = dt.now()
@@ -354,7 +308,7 @@ else:
     now = dt.now()
     gear_combinations()
     print("Combining gear time: " + str(dt.now() - now))
-if debug:
+if settings.debug:
     print(gears)
     print(material_costs)
     print(material_price)
@@ -405,8 +359,8 @@ while True:
             best_score = 0
             best_upgrades = []
             best_stats = {}
-            if use_owned_gear:
-                if timer:
+            if settings.use_owned_gear:
+                if settings.timer:
                     now = dt.now()
                 for combination in combinations: # yup, all 250k of them
                     gear_stats = get_stats(combination)
@@ -424,13 +378,13 @@ while True:
                         best_combination = combination
                         best_stats = gear_stats.copy()
                         best_minis = used_minis.copy()
-                if timer:
+                if settings.timer:
                     print("Time taken: " + str(dt.now() - now) + " (" + str((dt.now() - now) / len(combinations)) + " per combination)")
                     average_time.append(dt.now() - now)
                     average_time_per.append((dt.now() - now) / len(combinations))
 
             else:
-                if timer:
+                if settings.timer:
                     now = dt.now()
                 for combination in combinations: # yup, all 250k of them
                     gear_stats = get_stats(combination)
@@ -439,7 +393,7 @@ while True:
                     temp_mini_list = mini_list.copy()
                     # time to upgrade this gear a bunch of times!
                     # everytime we upgrade, we pick the upgrade that will increase score the most.
-                    for n in range(upgrades_per_gear_set):
+                    for n in range(settings.upgrades_per_gear_set):
                         best = max(upgrade_list, key=lambda x: get_score(gear_stats, upgrades[x]))
                         used_upgrades.append(best)
                         for stat, value in upgrades[best]:
@@ -458,7 +412,7 @@ while True:
                         best_stats = gear_stats.copy()
                         best_upgrades = used_upgrades.copy()
                         best_minis = used_minis.copy()
-                if timer:
+                if settings.timer:
                     print("Time taken: " + str(dt.now() - now) + " (" + str((dt.now() - now) / len(combinations)) + " per combination)")
                     average_time.append(dt.now() - now)
                     average_time_per.append((dt.now() - now) / len(combinations))
@@ -467,7 +421,7 @@ while True:
             # print results
             print("Color: " + song_color)
             print("Gear: " + str(best_combination))
-            if not use_owned_gear:
+            if not settings.use_owned_gear:
                 best_upgrades_short = {}
                 best_upgrades_shorter = {}
                 for u in best_upgrades:
@@ -475,7 +429,7 @@ while True:
                         best_upgrades_short[u] += 1
                     else:
                         best_upgrades_short[u] = 1
-                if upgrades_per_gear_set > 30:
+                if settings.upgrades_per_gear_set > 30:
                     for u in best_upgrades[:30]:
                         if u in best_upgrades_shorter:
                             best_upgrades_shorter[u] += 1
@@ -495,20 +449,20 @@ while True:
                 secondary_color = primary_color # how hacky
                 print("Pure color multiplier: " + str(round(get_score(best_stats) / base_score, 2)))
                 secondary_color = og_secondary_color
-            if not use_owned_gear:
+            if not settings.use_owned_gear:
                 mat_cost = get_material_cost(best_combination)
                 material_cost = {} # sorted mat_cost
                 for x in sorted(mat_cost):
                     material_cost[x] = mat_cost[x]
-                if use_legendary_color_gear or use_legendary_gear or use_rare_color_gear:
+                if settings.use_legendary_color_gear or settings.use_legendary_gear or settings.use_rare_color_gear:
                     print("Material cost: " + str(material_cost))
-                if use_legendary_color_gear or use_legendary_gear:
+                if settings.use_legendary_color_gear or settings.use_legendary_gear:
                     print("Price in coins: " + str(sum([material_price[x] * mat_cost[x] for x in mat_cost])))
             print()
 
     # print some raw data for my excel document
-            if song_colors_raw == "all" and not use_owned_gear:
-                if use_legendary_color_gear or use_legendary_gear:
+            if song_colors_raw == "all" and not settings.use_owned_gear:
+                if settings.use_legendary_color_gear or settings.use_legendary_gear:
                     toappend = best_combination.copy()
                     for gt in ["g-red", "g-blue", "g-green", "g-purple", "g-orange", "t-brass", "t-silver", "t-gold"]:
                         if gt in mat_cost:
@@ -553,7 +507,7 @@ while True:
                         toappend.append(str(tosum) if tosum else " ")
                     datalist[secondary_color].append(toappend)
 
-    if song_colors_raw == "all" and not use_owned_gear:
+    if song_colors_raw == "all" and not settings.use_owned_gear:
         for secondary_color in ["r", "c", "v", "f", "b"]:
             for valuelist in datalist[secondary_color]:
                 print("§".join(valuelist), end="")
@@ -561,6 +515,6 @@ while True:
             print("£", end="")
         print()
 
-    if timer and song_colors_raw == "all":
+    if settings.timer and song_colors_raw == "all":
         print("Average time taken: " + str(sum(average_time) / len(average_time)) + " (" + str(sum(average_time_per) / len(average_time_per)) + " per combination)")
     print("Total time taken: " + str(dt.now() - total_now))
