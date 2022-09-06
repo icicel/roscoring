@@ -9,13 +9,12 @@ use_legendary_color_gear = False
 
 ### GEAR SETTINGS
 use_unobtainable_gear = True # will not ignore sets defined below
-unobtainable_sets = ["e-poppy"]
+unobtainable_sets = ["e-poppy"] # not exhaustive
 upgrades_per_gear_set = 90 # 0 = no upgrades, 6 = 1 per slot, 30 = 5 per slot, 90 = 15 per slot etc.
 use_owned_gear = True # restricts selection to gear defined in owned.txt
 mini_level = 20 # rank is calculated automatically
 
 ### PROGRAM SETTINGS
-memory_saver = False # TODO: uses a modified method to create gear combinations in case you run into memory problems
 debug = False # prints debug info and quits
 timer = False # times the main loop
 

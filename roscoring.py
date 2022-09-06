@@ -228,13 +228,9 @@ def get_score(current_stats, increase=None):
     color_points = stats[primary_color] * 2 + stats[secondary_color]
     return (average_accuracy_points + color_points) * average_combo_multiplier * average_fever_multiplier
 
-def consider_combination(gear): # is there already a better combination in combinations? only used if memory_saver
-    gear_stats = list(get_stats(gear).values())
-    accepted = False
-
-    if accepted:
-        combinations.append(gear)
-        combinations_stats.append(gear_stats)
+# does there exist a combination which is better/worse in all stats?
+def consider_combination(combination):
+    combinations.append(combination)
 
 # create all combinations of gear
 def gear_combinations(cur=None, slot=0):
@@ -247,18 +243,7 @@ def gear_combinations(cur=None, slot=0):
     else:
         for gear_set in gears:
             if gears[gear_set][slot]:
-                combinations.append(cur + [gear_set])
-def gear_combinations_memory_saver(cur=None, slot=0):
-    if cur is None:
-        cur = []
-    if slot != 5:
-        for gear_set in gears:
-            if gears[gear_set][slot]:
-                gear_combinations_memory_saver(cur + [gear_set], slot + 1)
-    else:
-        for gear_set in gears:
-            if gears[gear_set][slot]:
-                yield cur + [gear_set]
+                consider_combination(cur + [gear_set])
 
 
 
@@ -294,20 +279,9 @@ else:
 print("Base predicted score: " + str(int(base_score * settings.song_hit_count)))
 print("Combining gear...")
 combinations = []
-if settings.memory_saver:
-    combinations_stats = []
-    print("Predicted combination time: " + prepare_time(2500 * combinations_length) + " to " + prepare_time(2900 * combinations_length))
-    now = dt.now()
-    combinations = gear_combinations_memory_saver()
-    print("Combining gear time: " + str(dt.now() - now))
-    import time
-    for a in combinations:
-        print(a)
-        time.sleep(.25)
-else:
-    now = dt.now()
-    gear_combinations()
-    print("Combining gear time: " + str(dt.now() - now))
+now = dt.now()
+gear_combinations()
+print("Combining gear time: " + str(dt.now() - now))
 if settings.debug:
     print(gears)
     print(material_costs)
