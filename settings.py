@@ -15,7 +15,6 @@ use_owned_gear = True # restricts selection to gear defined in owned.txt
 mini_level = 20 # rank is calculated automatically
 
 ### PROGRAM SETTINGS
-new_algorithm = False # TODO: an alternative way...
 memory_saver = False # TODO: uses a modified method to create gear combinations in case you run into memory problems
 debug = False # prints debug info and quits
 timer = False # times the main loop
