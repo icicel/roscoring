@@ -145,60 +145,58 @@ for line in stat_input:
     stat_list.append([float(value.strip()) for value in line])
 if settings.formulaic_stats:
     pp_coefs = poly.fit(range(81), [l[0] for l in stat_list], settings.polynomial_degree).convert().coef
-    ff_coefs = poly.fit(range(81), [l[1] for l in stat_list], settings.polynomial_degree).convert().coef
     ft_coefs = poly.fit(range(81), [l[3] for l in stat_list], settings.polynomial_degree).convert().coef
 x = 0
 for line in stat_list:
     if settings.formulaic_stats: # for smooth increases in stats
-        pp = sum([pp_coefs[n] * x ** n for n in range(settings.polynomial_degree + 1)])
-        ff = sum([ff_coefs[n] * x ** n for n in range(settings.polynomial_degree + 1)])
-        ft = sum([ft_coefs[n] * x ** n for n in range(settings.polynomial_degree + 1)])
+        perfect_points = sum([pp_coefs[n] * x ** n for n in range(settings.polynomial_degree + 1)])
+        fever_time = sum([ft_coefs[n] * x ** n for n in range(settings.polynomial_degree + 1)])
         x += 1
     else: # by using the raw rounded values, there could be situations where stats seemingly don't increase when upgrading
-        pp = float(line[0])
-        ff = float(line[1])
-        ft = float(line[3])
-    fm = float(line[2])
-    cm = float(line[4])
+        perfect_points = float(line[0])
+        fever_time = float(line[3])
+    fever_fill = float(line[1])
+    fever_mult = float(line[2])
+    combo_mult = float(line[4])
     perfect_acc = settings.perfect_accuracy
     great_acc = 1 - perfect_acc
     hit_count = settings.song_hit_count
     ln_count = settings.song_ln_count
     note_count = hit_count - ln_count
     length = settings.song_length
-    # we can save time on a bunch of calculations by doing them outside the loop, here!
+    # we can save time on a bunch of calculations by doing them outside the loop, here! we calculate:
     # Average Accuracy Points = <Perfect Points> * Perfect Accuracy + 150 * Great Accuracy
-    stat_value["pp"].append(pp * perfect_acc + 150 * great_acc)
+    stat_value["pp"].append(perfect_points * perfect_acc + 150 * great_acc)
     # Fever Fill Time = ( (Song Note Count / 3) / ((Perfect Accuracy + 0.5 * Great Accuracy) / <Fever Fill Rate>) ) / Song Hit Density
-    stat_value["ff"].append(((note_count / 3) / ((perfect_acc + 0.5 * great_acc) / ff)) / (hit_count / length))
-    # this is just <Fever Multiplier> though
-    stat_value["fm"].append(fm)
-    # Effective Fever Time = Song Length * (<Fever Time> * 0.16/1.67 + 0.0435)
-    stat_value["ft"].append(length * (ft * 0.16/1.67 + 0.0435))
+    stat_value["ff"].append(((note_count / 3) / ((perfect_acc + 0.5 * great_acc) / fever_fill)) / (hit_count / length))
+    # no calculations possible here
+    stat_value["fm"].append(fever_mult)
+    # Effective Fever Time = Song Length * <Fever Time> * 1.4
+    stat_value["ft"].append(length * fever_time * 1.4)
     # Average Combo Multiplier = ( (49.5  + Song Hit Count) * (<Combo Multiplier> - 1) + Song Hit Count ) / Song Hit Count
-    stat_value["cm"].append(((49.5 + hit_count) * (cm - 1) + hit_count) / hit_count)
+    stat_value["cm"].append(((49.5 + hit_count) * (combo_mult - 1) + hit_count) / hit_count)
 
 # we calculate song fever percentage for all possible combinations of fever fill time and effective fever time beforehand
 # this way, we don't have to repeat the super-slow division operations (integer division?! yucky!!) 250k times
-fever_percentage_from_stats = []
-for ff in range(81):
+fever_percent_from_stats = []
+for fever_fill in range(81):
     y = []
-    for ft in range(81):
-        fever_fill_time = stat_value["ff"][ff]
-        effective_fever_time = stat_value["ft"][ft]
+    for fever_time in range(81):
+        fever_fill_time = stat_value["ff"][fever_fill]
+        effective_fever_time = stat_value["ft"][fever_time]
         fever_cycle = fever_fill_time + effective_fever_time
         if settings.smooth_fever_percentage: # this alarmingly simple formula appears when song_length approaches infinity
-            song_fever_percentage = effective_fever_time / fever_cycle - 10 / settings.song_length
-            # i subtract 10/length to "de-idealize" the formula
+            song_fever_percentage = 0.75 * effective_fever_time / fever_cycle
+            # multiply with 0.75 to "de-idealize" the formula. the specific number was chosen at random
         else:
             cycle_count = settings.song_length // fever_cycle
-            incomplete_cycle = settings.song_length - fever_cycle * cycle_count  # song_length % fever_cycle
-            if incomplete_cycle > fever_fill_time:  # if the final fever cycle got into the "fever phase" (active fever when song finished)
+            incomplete_cycle = settings.song_length - fever_cycle * cycle_count # == song_length % fever_cycle
+            if incomplete_cycle > fever_fill_time: # if the final fever cycle got into the "fever phase" (active fever when song finished)
                 song_fever_percentage = (effective_fever_time * cycle_count + incomplete_cycle - fever_fill_time) / settings.song_length
             else:
                 song_fever_percentage = effective_fever_time * cycle_count / settings.song_length
         y.append(song_fever_percentage)
-    fever_percentage_from_stats.append(y)
+    fever_percent_from_stats.append(y)
 
 
 ### FUNCTIONS
@@ -237,16 +235,16 @@ def get_score(current_stats, increase=None):
         for stat in increase:
             stats[stat[0]] += stat[1]
     # get from stat_value
-    ff = 80 if stats["ff"] > 80 else stats["ff"]
-    ft = 80 if stats["ft"] > 80 else stats["ft"]
-    fever_multiplier = stat_value["fm"][80] if stats["fm"] > 80 else stat_value["fm"][stats["fm"]]
-    average_accuracy_points = stat_value["pp"][80] if stats["pp"] > 80 else stat_value["pp"][stats["pp"]]
-    average_combo_multiplier = stat_value["cm"][80] if stats["cm"] > 80 else stat_value["cm"][stats["cm"]]
+    fever_fill = 80 if stats["ff"] > 80 else stats["ff"]
+    fever_time = 80 if stats["ft"] > 80 else stats["ft"]
+    fever_mult = stat_value["fm"][80] if stats["fm"] > 80 else stat_value["fm"][stats["fm"]]
+    average_acc_points = stat_value["pp"][80] if stats["pp"] > 80 else stat_value["pp"][stats["pp"]]
+    average_combo_mult = stat_value["cm"][80] if stats["cm"] > 80 else stat_value["cm"][stats["cm"]]
     # time to calculate!
-    song_fever_percentage = fever_percentage_from_stats[ff][ft]
-    average_fever_multiplier = fever_multiplier * song_fever_percentage - song_fever_percentage + 1
+    fever_percent = fever_percent_from_stats[fever_fill][fever_time]
+    average_fever_mult = fever_mult * fever_percent - fever_percent + 1
     color_points = stats[primary_color] * 2 + stats[secondary_color]
-    return (average_accuracy_points + color_points) * average_combo_multiplier * average_fever_multiplier
+    return (average_acc_points + color_points) * average_combo_mult * average_fever_mult
 
 # does there exist a combination which is better/worse in all stats?
 def consider_combination(combination):

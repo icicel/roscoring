@@ -3,9 +3,9 @@
 use_tutorial_gear = False # boomboxes
 use_shop_gear = False # onii, xsitsu, random, xana, goonie, kagan, koneko, mighty and gamer's sets, and guitars
 use_event_gear = False # gear that was introduced in events (ex. slynk, landino and kurante's sets)
-use_legendary_gear = False # marshall, musketeer and rebel's sets
-use_rare_color_gear = True
-use_legendary_color_gear = False
+use_legendary_gear = True # marshall, musketeer and rebel's sets
+use_rare_color_gear = False
+use_legendary_color_gear = True
 
 ### GEAR SETTINGS
 use_unobtainable_gear = True # will not ignore sets defined below
@@ -34,5 +34,5 @@ song_ln_count = 10 # just count them manually lol
 
 ### ALGORITHM SETTINGS
 smooth_fever_percentage = True # modified fever percentage formula
-formulaic_stats = True # fit a polynomial onto the stat data to get smoother values
+formulaic_stats = True # fit a polynomial onto the stat data (currently only perfect points) to get smoother values
 polynomial_degree = 8
