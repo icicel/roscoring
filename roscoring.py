@@ -16,20 +16,20 @@ import settings
 # thanks to thestaticbro, vkess, samkoopayyy, 789legendary987 and robeatsgearmaster for these
 gear_input = open("rodata/gears.txt", "r").read().split("\n")[1:-1]
 gears = {}
-for gear_set in gear_input:
-    lines = gear_set.split("|")
-    geartype = lines[0].strip()
-    name = lines[1].strip()
-    if (((geartype == "rare color" and settings.use_rare_color_gear)
-    or (geartype == "leg. color" and settings.use_legendary_color_gear)
-    or (geartype == "legendary" and settings.use_legendary_gear)
-    or (geartype == "tutorial" and settings.use_tutorial_gear)
-    or (geartype == "shop" and settings.use_shop_gear)
-    or (geartype == "event" and settings.use_event_gear))
+for line in gear_input:
+    columns = line.split("|")
+    type = columns[0].strip()
+    name = columns[1].strip()
+    if (((type == "rare color" and settings.use_rare_color_gear)
+    or (type == "leg. color" and settings.use_legendary_color_gear)
+    or (type == "legendary" and settings.use_legendary_gear)
+    or (type == "tutorial" and settings.use_tutorial_gear)
+    or (type == "shop" and settings.use_shop_gear)
+    or (type == "event" and settings.use_event_gear))
     and (name not in settings.unobtainable_sets or settings.use_unobtainable_gear))\
     or settings.use_owned_gear:
         gears[name] = []
-        for gear in lines[2:]:
+        for gear in columns[2:]:
             gear = gear.strip()
             if gear != "-":
                 x = []
@@ -43,13 +43,14 @@ for gear_set in gear_input:
 # create gear material costs
 cost_input = open("rodata/costs.txt", "r").read().split("\n")[1:-1]
 material_costs = {}
-for gear_set in cost_input:
-    lines = gear_set.split("|")
-    name = lines[0]
+for line in cost_input:
+    columns = line.split("|")
+    name = columns[0]
     material_costs[name] = []
-    for gear in lines[1:]:
+    for gear in columns[1:]:
+        gear = gear.strip()
         x = []
-        for item in gear.strip().split(" "):
+        for item in gear.split(" "):
             (material, amount) = item.split(",")
             x.append((material, int(amount)))
         material_costs[name].append(x)
@@ -60,9 +61,9 @@ for gear_set in cost_input:
 price_input = open("rodata/prices.txt", "r").read().split("\n")[1:-1]
 material_price = {}
 for line in price_input:
-    line = line.split("|")
-    material = line[0].strip()
-    price = line[1].strip()
+    columns = line.split("|")
+    material = columns[0].strip()
+    price = columns[1].strip()
     material_price[material] = int(price)
 
 # create minis
@@ -70,10 +71,10 @@ mini_input = open("rodata/minis.txt", "r").read().split("\n")[1:-1]
 minis = {}
 mini_level = settings.mini_level
 for line in mini_input:
-    line = line.split("|")
-    name = line[0].strip()
-    stats_color = line[1].strip()
-    stats_gear = line[2].strip()
+    columns = line.split("|")
+    name = columns[0].strip()
+    stats_color = columns[1].strip()
+    stats_gear = columns[2].strip()
     output = []
     if mini_level < 20:
         level_mult = 1 + 1.5 * (mini_level - 1) / 19
@@ -94,9 +95,9 @@ mini_list = list(minis.keys())
 upgrade_input = open("rodata/upgrades.txt", "r").read().split("\n")[1:-1]
 upgrades = {}
 for line in upgrade_input:
-    line = line.split("|")
-    upgrade = line[0].strip()
-    stats = line[1].strip()
+    columns = line.split("|")
+    upgrade = columns[0].strip()
+    stats = columns[1].strip()
     x = []
     for item in stats.split(" "):
         (stat, value) = item.split(",")
@@ -105,16 +106,17 @@ for line in upgrade_input:
 upgrade_list = list(upgrades.keys())
 
 # create owned gear
+# literally just a copy of the gears dictionary with only the gear defined in the data file
 if settings.use_owned_gear:
     owned_gears = {}
     for gear_set in gears:
         owned_gears[gear_set] = [None, None, None, None, None, None]
     owned_input = open("rodata/owned.txt", "r").read().split("\n")[1:-1]
     for line in owned_input:
-        line = line.split("|")
-        slot = {"hat": 0, "neck": 1, "face": 2, "shirt": 3, "back": 4, "pants": 5}[line[0].strip()]
-        gear_set = line[1].strip()
-        gear_upgrades = line[2].strip()
+        columns = line.split("|")
+        slot = {"hat": 0, "neck": 1, "face": 2, "shirt": 3, "back": 4, "pants": 5}[columns[0].strip()]
+        gear_set = columns[1].strip()
+        gear_upgrades = columns[2].strip()
         gear_stats = {}
         for stat, value in gears[gear_set][slot]:
             if stat in gear_stats:
@@ -128,7 +130,8 @@ if settings.use_owned_gear:
                         gear_stats[stat] += value
                     else:
                         gear_stats[stat] = value
-        owned_gears[gear_set][slot] = [(stat, gear_stats[stat]) for stat in gear_stats.keys()]
+        owned_gears[gear_set][slot] = list(gear_stats.items())
+    del gears
     gears = owned_gears
 
 # create stat points to stat value dictionary
@@ -405,9 +408,9 @@ while True:
             best_score = 0
             best_upgrades = []
             best_stats = {}
+            if settings.timer:
+                now = dt.now()
             if settings.use_owned_gear:
-                if settings.timer:
-                    now = dt.now()
                 for combination in combinations: # yup, all 250k of them
                     gear_stats = get_stats(combination)
                     used_minis = []
@@ -422,16 +425,10 @@ while True:
                     if new_score > best_score:
                         best_score = new_score
                         best_combination = combination
-                        best_stats = gear_stats.copy()
-                        best_minis = used_minis.copy()
-                if settings.timer:
-                    print("Time taken: " + str(dt.now() - now) + " (" + str((dt.now() - now) / len(combinations)) + " per combination)")
-                    average_time.append(dt.now() - now)
-                    average_time_per.append((dt.now() - now) / len(combinations))
+                        best_stats = gear_stats
+                        best_minis = used_minis
 
             else:
-                if settings.timer:
-                    now = dt.now()
                 for combination in combinations: # yup, all 250k of them
                     gear_stats = get_stats(combination)
                     used_upgrades = []
@@ -455,14 +452,14 @@ while True:
                     if new_score > best_score:
                         best_score = new_score
                         best_combination = combination
-                        best_stats = gear_stats.copy()
-                        best_upgrades = used_upgrades.copy()
-                        best_minis = used_minis.copy()
-                if settings.timer:
-                    print("Time taken: " + str(dt.now() - now) + " (" + str((dt.now() - now) / len(combinations)) + " per combination)")
-                    average_time.append(dt.now() - now)
-                    average_time_per.append((dt.now() - now) / len(combinations))
+                        best_stats = gear_stats
+                        best_upgrades = used_upgrades
+                        best_minis = used_minis
 
+            if settings.timer:
+                print("Time taken: " + str(dt.now() - now) + " (" + str((dt.now() - now) / len(combinations)) + " per combination)")
+                average_time.append(dt.now() - now)
+                average_time_per.append((dt.now() - now) / len(combinations))
 
             # print results
             print("Color: " + song_color)
@@ -553,14 +550,15 @@ while True:
                         toappend.append(str(tosum) if tosum else " ")
                     datalist[secondary_color].append(toappend)
 
-    if song_colors_raw == "all" and not settings.use_owned_gear:
-        for secondary_color in ["r", "c", "v", "f", "b"]:
-            for valuelist in datalist[secondary_color]:
-                print("§".join(valuelist), end="")
-                print("¤", end="")
-            print("£", end="")
-        print()
+    if song_colors_raw == "all":
+        if not settings.use_owned_gear:
+            for secondary_color in ["r", "c", "v", "f", "b"]:
+                for valuelist in datalist[secondary_color]:
+                    print("§".join(valuelist), end="")
+                    print("¤", end="")
+                print("£", end="")
+            print()
 
-    if settings.timer and song_colors_raw == "all":
-        print("Average time taken: " + str(sum(average_time) / len(average_time)) + " (" + str(sum(average_time_per) / len(average_time_per)) + " per combination)")
+        if settings.timer:
+            print("Average time taken: " + str(sum(average_time) / len(average_time)) + " (" + str(sum(average_time_per) / len(average_time_per)) + " per combination)")
     print("Total time taken: " + str(dt.now() - total_now))

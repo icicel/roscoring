@@ -38,7 +38,7 @@ back  | r-flow    | cm,cm,cm,cm,cm
 back  | r-beat    | ft,ft,ft,ft,ft
 back  | b-beat    | -
 back  | kurante   | pp,pp,pp,pp,pp
-back  | pink      | -
+back  | g-pink      | -
 pants | r-rush    | fm,fm,fm,fm
 pants | r-chill   | pp,pp,pp,pp,pp
 pants | r-vibe    | ff,ff,ff,ff,ff
