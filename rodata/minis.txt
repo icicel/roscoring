@@ -38,3 +38,4 @@ rutra				r,11 b,3	cm,6
 dark cat			b,11 v,3	ff,5
 reku mochizuki			v,11 c,3	cm,5
 ushi-chan			b,11 v,3	ft,6
+ardolf				f,11 b,3	fm,6
