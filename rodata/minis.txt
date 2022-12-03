@@ -42,3 +42,4 @@ ardolf                   | f,11 b,3      | fm,6
 tobu                     | c,11 b,3      | fm,5
 seatrus                  | f,10 r,6      | ft,5
 halloween witch teresa   | b,13 f,7      | cm,6
+slynk                    | f,11 v,5      | fm,6
