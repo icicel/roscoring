@@ -60,3 +60,4 @@ e-reku        | v,12 c,5 cm,4 ff,1  | -                   | -                   
 e-ushi        | b,12 v,5 cm,3 fm,3  | -                   | -                   | -                   | -                    | -
 e-ardolf      | f,10 b,7 ff,5       | -                   | -                   | f,11 b,6 fm,5       | f,12 b,5 ft,5        | -
 e-maxzy       | -                   | -                   | c,10 v,7 cm,5 ff,3  | -                   | -                    | - 
+e-tv room     | v,12 r,7 cm,2 ft,3  | -                   | -                   | -                   | -                    | -
