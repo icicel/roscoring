@@ -19,14 +19,13 @@ gears = {}
 for gear_set in gear_input:
     lines = gear_set.split("|")
     name = lines[0].strip()
-    name = name if name[:2] in ["r-", "l-", "b-", "g-"] else name[2:]
-    geartype = lines[0][:2]
+    geartype = name[:2]
+    name = name if name[:2] in ["r-", "l-", "b-"] else name[2:]
     if (((geartype == "r-" and settings.use_rare_color_gear)
     or (geartype == "l-" and settings.use_legendary_color_gear)
     or (geartype == "x-" and settings.use_legendary_gear)
     or (geartype == "b-" and settings.use_tutorial_gear)
     or (geartype == "s-" and settings.use_shop_gear)
-    or (geartype == "g-" and settings.use_shop_gear) # guitars
     or (geartype == "e-" and settings.use_event_gear))
     and (name not in settings.unobtainable_sets or settings.use_unobtainable_gear))\
     or settings.use_owned_gear:

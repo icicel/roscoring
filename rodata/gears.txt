@@ -22,10 +22,10 @@ s-koneko      | c,9 v,5 pp,4        | c,9 v,6 pp,3        | -                   
 s-gamer       | b,8 c,3 fm,5 cm,4   | b,8 c,6 fm,4 cm,2   | b,8 c,4 fm,5 cm,3   | b,11 c,2 cm,4 fm,3  | -                    | c,5 b,9 cm,3 fm,3
 s-mighty      | -                   | -                   | v,14 c,4            | -                   | -                    | -
 s-kairoh      | -                   | -                   | -                   | -                   | f,12 fm,8            | -
-g-hardcore    | -                   | -                   | -                   | -                   | b,10 r,10            | -
-g-casual      | -                   | -                   | -                   | -                   | f,12 v,3             | -
-g-axe         | -                   | -                   | -                   | -                   | b,7 fm,6             | -
-g-metal       | -                   | -                   | -                   | -                   | r,7 cm,5             | -
+s-g-hardcore  | -                   | -                   | -                   | -                   | b,10 r,10            | -
+s-g-casual    | -                   | -                   | -                   | -                   | f,12 v,3             | -
+s-g-axe       | -                   | -                   | -                   | -                   | b,7 fm,6             | -
+s-g-metal     | -                   | -                   | -                   | -                   | r,7 cm,5             | -
 b-rush        | -                   | -                   | -                   | -                   | r,10 pp,4            | -
 b-chill       | -                   | -                   | -                   | -                   | c,10 pp,4            | -
 b-vibe        | -                   | -                   | -                   | -                   | v,10 pp,4            | -
@@ -52,7 +52,7 @@ e-creo        | -                   | -                   | -                   
 e-captain     | f,10 r,7 cm,5 fm,3  | -                   | -                   | -                   | -                    | -
 e-shaii       | f,12 v,5 fm,4 ft,3  | -                   | -                   | -                   | f,13 v,4 fm,3 ft,4   | -
 e-roxie       | v,10 r,8 ff,4       | -                   | v,11 r,7 fm,4       | v,8 r,11 ft,4       | -                    | v,7 r,12 cm,4
-e-pink        | -                   | -                   | -                   | -                   | v,10 c,7 ft,4 fm,2   | -
+e-g-pink      | -                   | -                   | -                   | -                   | v,10 c,7 ft,4 fm,2   | -
 e-boyfriend   | b,6 f,4 ff,4        | -                   | -                   | -                   | -                    | -
 e-girlfriend  | c,6 f,4 ft,4        | -                   | -                   | -                   | -                    | -
 e-restriction | r,12 f,5 cm,2 ft,4  | -                   | r,11 f,6 cm,4 ft,2  | -                   | -                    | -
