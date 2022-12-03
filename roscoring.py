@@ -1,4 +1,3 @@
-from os import kill
 from numpy.polynomial.polynomial import Polynomial as poly
 from datetime import datetime as dt
 import math
@@ -203,6 +202,7 @@ for fever_fill in range(81):
 ### FUNCTIONS
 
 # returns the stats of the gear
+# TODO: add gear/mini/upgrade(s) and active color as parameters
 def get_stats(current_gear):
     gear_stats = {"r": 0, "c": 0, "v": 0, "f": 0, "b": 0, "fm": 0, "pp": 0, "ff": 0, "cm": 0, "ft": 0}
     slot = 0
@@ -455,6 +455,38 @@ while True:
                         best_stats = gear_stats
                         best_upgrades = used_upgrades
                         best_minis = used_minis
+            
+            '''
+            ALGORITHM IDEA - BRUTE FORCE FILTER
+
+            GEAR SELECTION
+            262144 gear combinations (with regular settings)
+            find the 100 best-performing gear combinations
+            262144 score calculations total
+
+            UPGRADE SELECTION
+            129766 upgrade combinations (assuming cp and pp are merged into bp)
+            compare every gear combination with every upgrade combination
+            save the 100 best-performing upgrade combinations per gear
+            (for 10000 gear-upgrade combinations)
+            12976600 score calculations total
+
+            MINI SELECTION
+            161700 mini combinations (for 100 minis)
+            for every gear-upgrade combination:
+            - get the top 20 (20%?) minis based on individual performance
+            - there are now only 1140 mini combinations
+            - choose the mini combination with the best performance
+            12400000 score calculations total
+
+            TOTAL: 25 638 744 SCORE CALCULATIONS
+            '''
+
+            '''
+            ALGORITHM IDEA - ITERATED HEURISTICS
+
+            ???
+            '''
 
             if settings.timer:
                 print("Time taken: " + str(dt.now() - now) + " (" + str((dt.now() - now) / len(combinations)) + " per combination)")
