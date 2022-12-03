@@ -35,3 +35,4 @@ f-777				v,11 f,3	ft,6
 se-u-ra				f,11 r,3	ft,6
 creo				c,11 b,3	fm,6
 rutra				r,11 b,3	cm,6
+dark cat			b,11 v,3	ff,5
