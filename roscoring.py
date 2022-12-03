@@ -186,8 +186,8 @@ for fever_fill in range(81):
         effective_fever_time = stat_value["ft"][fever_time]
         fever_cycle = fever_fill_time + effective_fever_time
         if settings.smooth_fever_percentage: # this alarmingly simple formula appears when song_length approaches infinity
-            song_fever_percentage = 0.75 * effective_fever_time / fever_cycle
-            # multiply with 0.75 to "de-idealize" the formula. the specific number was chosen at random
+            song_fever_percentage = 0.8 * effective_fever_time / fever_cycle
+            # multiply with 0.8 to "de-idealize" the formula. the specific number was chosen at random
         else:
             cycle_count = settings.song_length // fever_cycle
             incomplete_cycle = settings.song_length - fever_cycle * cycle_count # == song_length % fever_cycle
@@ -306,9 +306,6 @@ def gear_combinations(cur=[], slot=0):
 
 ### PRINT INFO
 
-primary_color = "r" # it doesn't matter, they're all 0 anyway
-secondary_color = "r"
-base_score = get_score({"r": 0, "c": 0, "v": 0, "f": 0, "b": 0, "fm": 0, "pp": 0, "ff": 0, "cm": 0, "ft": 0})
 def prepare_time(time): # excessively complicated function for converting microseconds to a proper time
     year = dt.now().year
     month = dt.now().month
@@ -323,6 +320,9 @@ def prepare_time(time): # excessively complicated function for converting micros
         return str(days) + "d;" + dt.strftime(dt(year, month, day, hours, minutes, seconds, microseconds), dateformat)
     else:
         return dt.strftime(dt(year, month, day, hours, minutes, seconds, microseconds), dateformat)
+
+primary_color = "r" # it doesn't matter, they're all 0 anyway
+secondary_color = "r"
 combinations_length = 1
 for slot in range(6):
     combinations_length *= len([gears[s][slot] for s in gears if gears[s][slot]])
@@ -333,6 +333,7 @@ if settings.use_owned_gear:
 else:
     print("Predicted time per song color: " + prepare_time(2800 * combinations_length) + " to " + prepare_time(3100 * combinations_length))
     print("Predicted time all: " + prepare_time(25 * 2800 * combinations_length) + " to " + prepare_time(25 * 3100 * combinations_length))
+base_score = get_score({"r": 0, "c": 0, "v": 0, "f": 0, "b": 0, "fm": 0, "pp": 0, "ff": 0, "cm": 0, "ft": 0})
 print("Base predicted score: " + str(int(base_score * settings.song_hit_count)))
 print("Combining gear...")
 now = dt.now()
