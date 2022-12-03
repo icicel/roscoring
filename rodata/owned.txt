@@ -1,48 +1,48 @@
-slot	set		upgrades
-hat	musketeer	ff,ff,ff,ff,ff
-hat	r-rush		fm,fm,fm,fm
-hat	r-chill		pp,pp,c,c,c
-hat	r-vibe		ff,ff,ff,ff,ff
-hat	r-flow		cm,cm,cm,cm,cm
-hat	r-beat		ft,ft,ft,ft
-hat	lisa		
-hat	witch		
-hat	goldn		
-hat	captain		
-neck	r-rush		fm,fm,fm,fm
-neck	r-chill		
-neck	r-vibe		ff,ff,ff,ff,ff
-neck	r-flow		cm,cm,cm,cm,cm
-neck	r-beat		ft,ft,ft,ft
-neck	xsitsu		ft,ft,ft,ft,ft
-neck	random		
-face	r-rush		fm,fm,fm,fm
-face	r-chill		pp,pp,pp,pp,pp
-face	r-vibe		ff,ff,ff,ff,ff
-face	r-flow		cm,cm,cm,cm,cm
-face	r-beat		ft,ft,ft,ft,ft
-face	random		ff,ff,ff,ff,ff
-face	tobu		
-shirt	r-rush		fm,fm,fm,fm
-shirt	r-chill		pp,pp,pp,pp,pp
-shirt	r-vibe		ff,ff,ff,ff
-shirt	r-flow		cm,cm,cm,cm,cm
-shirt	r-beat		ft,ft,ft,ft,ft
-shirt	xana		fm,fm,fm,fm,fm
-shirt	gamer		
-shirt	landino		
-back	r-rush		fm,fm,fm,fm
-back	r-chill		pp,pp,pp,pp,pp
-back	r-vibe		ff,ff,ff,ff,ff
-back	r-flow		cm,cm,cm,cm,cm
-back	r-beat		ft,ft,ft,ft,ft
-back	b-beat		
-back	kurante		pp,pp,pp,pp,pp
-back	pink		
-pants	r-rush		fm,fm,fm,fm
-pants	r-chill		pp,pp,pp,pp,pp
-pants	r-vibe		ff,ff,ff,ff,ff
-pants	r-flow		cm,cm,cm,cm,cm
-pants	r-beat		ft,ft,ft,ft
-pants	gamer		ft,ft,ft,ft,ft
-pants	kagan		fm,fm,fm,fm,fm
+slot  | set       | upgrades
+hat   | musketeer | ff,ff,ff,ff,ff
+hat   | r-rush    | fm,fm,fm,fm
+hat   | r-chill   | pp,pp,c,c,c
+hat   | r-vibe    | ff,ff,ff,ff,ff
+hat   | r-flow    | cm,cm,cm,cm,cm
+hat   | r-beat    | ft,ft,ft,ft
+hat   | lisa      | -
+hat   | witch     | -
+hat   | goldn     | -
+hat   | captain   | -
+neck  | r-rush    | fm,fm,fm,fm
+neck  | r-chill   | -
+neck  | r-vibe    | ff,ff,ff,ff,ff
+neck  | r-flow    | cm,cm,cm,cm,cm
+neck  | r-beat    | ft,ft,ft,ft
+neck  | xsitsu    | ft,ft,ft,ft,ft
+neck  | random    | -
+face  | r-rush    | fm,fm,fm,fm
+face  | r-chill   | pp,pp,pp,pp,pp
+face  | r-vibe    | ff,ff,ff,ff,ff
+face  | r-flow    | cm,cm,cm,cm,cm
+face  | r-beat    | ft,ft,ft,ft,ft
+face  | random    | ff,ff,ff,ff,ff
+face  | tobu      | -
+shirt | r-rush    | fm,fm,fm,fm
+shirt | r-chill   | pp,pp,pp,pp,pp
+shirt | r-vibe    | ff,ff,ff,ff
+shirt | r-flow    | cm,cm,cm,cm,cm
+shirt | r-beat    | ft,ft,ft,ft,ft
+shirt | xana      | fm,fm,fm,fm,fm
+shirt | gamer     | -
+shirt | landino   | -
+back  | r-rush    | fm,fm,fm,fm
+back  | r-chill   | pp,pp,pp,pp,pp
+back  | r-vibe    | ff,ff,ff,ff,ff
+back  | r-flow    | cm,cm,cm,cm,cm
+back  | r-beat    | ft,ft,ft,ft,ft
+back  | b-beat    | -
+back  | kurante   | pp,pp,pp,pp,pp
+back  | pink      | -
+pants | r-rush    | fm,fm,fm,fm
+pants | r-chill   | pp,pp,pp,pp,pp
+pants | r-vibe    | ff,ff,ff,ff,ff
+pants | r-flow    | cm,cm,cm,cm,cm
+pants | r-beat    | ft,ft,ft,ft
+pants | gamer     | ft,ft,ft,ft,ft
+pants | kagan     | fm,fm,fm,fm,fm

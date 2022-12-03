@@ -1,61 +1,61 @@
-set		hat			neck			face			shirt			back			pants
-x-marshall	r,12 c,12 fm,6 ft,5	r,12 c,10 fm,7 ff,5	r,14 c,7 fm,7 ff,6	r,12 c,12 fm,8 ft,8	r,12 c,12 fm,6 ff,5	r,13 c,12 fm,7 ft,7
-x-musketeer	f,13 v,13 cm,6 ft,2	f,15 v,11 cm,7 ff,2	f,14 v,14 cm,5 pp,1	f,14 v,13 cm,10		f,13 v,12 cm,6 pp,4	f,14 v,13 cm,9 fm,3
-x-rebel		b,13 c,12 pp,9		b,13 c,10 pp,12		b,13 c,8 pp,13		b,14 c,14 pp,10		b,13 c,11 pp,11 fm,3	b,14 c,14 pp,9 ff,2
-l-rush		r,16 v,9 pp,4 cm,6	r,19 v,7 pp,5 cm,6	r,19 v,7 pp,5 cm,5	r,21 v,9 pp,5 cm,5	r,21 v,10 pp,6 cm,5	r,20 v,8 pp,6 cm,6
-l-chill		c,19 f,10 pp,10		c,15 f,11 pp,8		c,17 f,11 pp,8		c,21 f,10 pp,9		c,19 f,9 pp,9		c,18 f,10 pp,9
-l-vibe		v,17 b,11 cm,9		v,18 b,6 cm,14		v,18 b,9 cm,7		v,20 b,10 cm,11		v,20 b,9 cm,9		v,20 b,9 cm,9
-l-flow		f,17 c,7 fm,12		f,16 c,11 fm,8		f,17 c,10 fm,9		f,21 c,10 fm,8		f,21 c,7 fm,7		f,19 c,11 fm,9
-l-beat		b,18 f,7 ff,7 ft,5	b,16 f,9 ff,6 ft,7	b,18 f,9 ff,8 ft,5	b,21 f,9 ff,7 ft,7	b,19 f,10 ff,4 ft,8	b,18 f,7 ff,6 ft,7
-r-rush		r,14 v,6 pp,3 cm,4	r,14 v,4 pp,5 cm,5	r,14 v,6 pp,4 cm,4	r,15 v,7 pp,4 cm,4	r,14 v,8 pp,5 cm,2	r,16 v,6 pp,4 cm,4
-r-chill		c,14 f,8 pp,9		c,13 f,10 pp,5		c,14 f,9 pp,6		c,15 f,10 pp,6		c,15 f,8 pp,7		c,14 f,9 pp,7
-r-vibe		v,13 b,10 cm,6		v,12 b,3 cm,12		v,15 b,8 cm,7		v,16 b,5 cm,10		v,16 b,8 cm,6		v,15 b,8 cm,6
-r-flow		f,15 c,6 fm,9		f,13 c,9 fm,6		f,14 c,8 fm,7		f,16 c,8 fm,6		f,17 c,4 fm,7		f,14 c,9 fm,7
-r-beat		b,16 f,6 ff,6 ft,3	b,14 f,7 ff,4 ft,5	b,13 f,8 ff,5 ft,3	b,15 f,6 ff,4 ft,4	b,15 f,7 ff,3 ft,4	b,14 f,6 ff,5 ft,4
-s-random	v,5 c,2 fm,3		c,2 v,4 fm,4		c,2 v,4 fm,4		v,6 c,1 fm,5		-			v,6 c,1 fm,4
-s-onii		r,6 f,3 cm,3		r,5 f,2 cm,5		r,4 f,3 cm,5		r,6 f,1 cm,5		r,4 f,1 cm,2		r,6 f,2 cm,5
-s-xsitsu	b,5 c,3 pp,4		c,3 b,4 pp,4		b,6 c,1 pp,5		b,5 c,2 pp,5		-			b,4 c,2 pp,4
-s-xana		r,4 b,3 ff,2 fm,2	f,4 b,1 ff,3 fm,2	r,4 b,2 ff,3 fm,1	b,2 r,3 ff,2 fm,3	-			r,4 b,2 ff,2 fm,2
-s-goonie	f,5 v,3			f,7 fm,2		f,6 v,2			f,6 v,1 pp,1		-			f,5 v,2 ff,1
-s-kagan		c,6 r,3 cm,3		c,5 r,2 cm,4		c,5 r,3 cm,3		c,5 r,1 cm,4		-			c,5 r,2 cm,3
-s-koneko	c,9 v,5 pp,4		c,9 v,6 pp,3		-			c,9 v,6 pp,4		c,8 v,7 pp,3		c,9 v,7 pp,4
-s-gamer		b,8 c,3 fm,5 cm,4	b,8 c,6 fm,4 cm,2	b,8 c,4 fm,5 cm,3	b,11 c,2 cm,4 fm,3	-			c,5 b,9 cm,3 fm,3
-s-mighty	-			-			v,14 c,4		-			-			-
-s-kairoh	-			-			-			-			f,12 fm,8		-
-g-hardcore	-			-			-			-			b,10 r,10		-
-g-casual	-			-			-			-			f,12 v,3		-
-g-axe		-			-			-			-			b,7 fm,6		-
-g-metal		-			-			-			-			r,7 cm,5		-
-b-rush		-			-			-			-			r,10 pp,4		-
-b-chill		-			-			-			-			c,10 pp,4		-
-b-vibe		-			-			-			-			v,10 pp,4		-
-b-flow		-			-			-			-			f,10 pp,4		-
-b-beat		-			-			-			-			b,10 pp,4		-
-e-poppy		f,10 r,8 pp,5		-			-			f,10 r,5 pp,6		-			f,10 r,6 pp,6
-e-rutra		-			-			-			r,10 cm,5		-			-
-e-riran		-			r,13 b,5 cm,4 ft,3	-			-			-			-
-e-viyella	b,14 ff,3 fm,4		-			-			-			-			-
-e-goldn		c,8 f,10 ff,3 ft,3	-			-			-			-			-
-e-lisa		c,12 r,4 cm,4 ft,3	-			-			-			-			-
-e-slynk		v,10 f,7 fm,3 ft,2	-			-			v,12 f,5 fm,3 ft,3	-			v,11 f,6 ft,3 fm,2
-e-kepo		c,11 r,8 cm,5		-			-			-			-			-
-e-garcello	v,10 f,8 ft,4		-			-			-			-			-
-e-tobu		-			-			v,6 r,8 cm,3 fm,4	-			-			-
-e-christmas	f,8 r,8 cm,5		-			r,9 b,7 ft,5		-			-			-
-e-coach cv	c,10 v,7 fm,5		-			-			-			-			-
-e-coach fv	f,12 v,4 fm,3		-			-			f,11 v,7 fm,4		-			f,10 v,7 fm,5
-e-coach cr	c,10 r,8 cm,3		-			-			c,11 r,7 cm,6		-			c,11 r,7 cm,5
-e-landino	c,11 v,8 pp,2		c,10 v,4 pp,4		-			c,11 f,9 pp,4		-			c,11 f,8 pp,4
-e-kurante	b,7 v,7 cm,4 pp,1	-			-			b,8 v,8 cm,6 pp,1	b,8 v,8 pp,2 cm,4	b,7 v,6 cm,5 fm,1
-e-witch		c,8 f,10 ff,3 ft,3	-			-			-			-			-
-e-creo		-			-			-			c,10 r,7 pp,4 cm,3	-			-
-e-captain	f,10 r,7 cm,5 fm,3	-			-			-			-			-
-e-shaii		f,12 v,5 fm,4 ft,3	-			-			-			f,13 v,4 fm,3 ft,4	-
-e-roxie		v,10 r,8 ff,4		-			v,11 r,7 fm,4		v,8 r,11 ft,4		-			v,7 r,12 cm,4
-e-pink		-			-			-			-			v,10 c,7 ft,4 fm,2	-
-e-boyfriend	b,6 f,4 ff,4		-			-			-			-			-
-e-girlfriend	c,6 f,4 ft,4		-			-			-			-			-
-e-restriction	r,12 f,5 cm,2 ft,4	-			r,11 f,6 cm,4 ft,2	-			-			-
-e-reku		v,12 c,5 cm,4 ff,1	-			-			-			-			-
-e-ushi		b,12 v,5 cm,3 fm,3	-			-			-			-			-
-e-ardolf	f,10 b,7 ff,5		-			-			f,11 b,6 fm,5		f,12 b,5 ft,5		-
+set           | hat                 | neck                | face                | shirt               | back                 | pants
+x-marshall    | r,12 c,12 fm,6 ft,5 | r,12 c,10 fm,7 ff,5 | r,14 c,7 fm,7 ff,6  | r,12 c,12 fm,8 ft,8 | r,12 c,12 fm,6 ff,5  | r,13 c,12 fm,7 ft,7
+x-musketeer   | f,13 v,13 cm,6 ft,2 | f,15 v,11 cm,7 ff,2 | f,14 v,14 cm,5 pp,1 | f,14 v,13 cm,10     | f,13 v,12 cm,6 pp,4  | f,14 v,13 cm,9 fm,3
+x-rebel       | b,13 c,12 pp,9      | b,13 c,10 pp,12     | b,13 c,8 pp,13      | b,14 c,14 pp,10     | b,13 c,11 pp,11 fm,3 | b,14 c,14 pp,9 ff,2
+l-rush        | r,16 v,9 pp,4 cm,6  | r,19 v,7 pp,5 cm,6  | r,19 v,7 pp,5 cm,5  | r,21 v,9 pp,5 cm,5  | r,21 v,10 pp,6 cm,5  | r,20 v,8 pp,6 cm,6
+l-chill       | c,19 f,10 pp,10     | c,15 f,11 pp,8      | c,17 f,11 pp,8      | c,21 f,10 pp,9      | c,19 f,9 pp,9        | c,18 f,10 pp,9
+l-vibe        | v,17 b,11 cm,9      | v,18 b,6 cm,14      | v,18 b,9 cm,7       | v,20 b,10 cm,11     | v,20 b,9 cm,9        | v,20 b,9 cm,9
+l-flow        | f,17 c,7 fm,12      | f,16 c,11 fm,8      | f,17 c,10 fm,9      | f,21 c,10 fm,8      | f,21 c,7 fm,7        | f,19 c,11 fm,9
+l-beat        | b,18 f,7 ff,7 ft,5  | b,16 f,9 ff,6 ft,7  | b,18 f,9 ff,8 ft,5  | b,21 f,9 ff,7 ft,7  | b,19 f,10 ff,4 ft,8  | b,18 f,7 ff,6 ft,7
+r-rush        | r,14 v,6 pp,3 cm,4  | r,14 v,4 pp,5 cm,5  | r,14 v,6 pp,4 cm,4  | r,15 v,7 pp,4 cm,4  | r,14 v,8 pp,5 cm,2   | r,16 v,6 pp,4 cm,4
+r-chill       | c,14 f,8 pp,9       | c,13 f,10 pp,5      | c,14 f,9 pp,6       | c,15 f,10 pp,6      | c,15 f,8 pp,7        | c,14 f,9 pp,7
+r-vibe        | v,13 b,10 cm,6      | v,12 b,3 cm,12      | v,15 b,8 cm,7       | v,16 b,5 cm,10      | v,16 b,8 cm,6        | v,15 b,8 cm,6
+r-flow        | f,15 c,6 fm,9       | f,13 c,9 fm,6       | f,14 c,8 fm,7       | f,16 c,8 fm,6       | f,17 c,4 fm,7        | f,14 c,9 fm,7
+r-beat        | b,16 f,6 ff,6 ft,3  | b,14 f,7 ff,4 ft,5  | b,13 f,8 ff,5 ft,3  | b,15 f,6 ff,4 ft,4  | b,15 f,7 ff,3 ft,4   | b,14 f,6 ff,5 ft,4
+s-random      | v,5 c,2 fm,3        | c,2 v,4 fm,4        | c,2 v,4 fm,4        | v,6 c,1 fm,5        | -                    | v,6 c,1 fm,4
+s-onii        | r,6 f,3 cm,3        | r,5 f,2 cm,5        | r,4 f,3 cm,5        | r,6 f,1 cm,5        | r,4 f,1 cm,2         | r,6 f,2 cm,5
+s-xsitsu      | b,5 c,3 pp,4        | c,3 b,4 pp,4        | b,6 c,1 pp,5        | b,5 c,2 pp,5        | -                    | b,4 c,2 pp,4
+s-xana        | r,4 b,3 ff,2 fm,2   | f,4 b,1 ff,3 fm,2   | r,4 b,2 ff,3 fm,1   | b,2 r,3 ff,2 fm,3   | -                    | r,4 b,2 ff,2 fm,2
+s-goonie      | f,5 v,3             | f,7 fm,2            | f,6 v,2             | f,6 v,1 pp,1        | -                    | f,5 v,2 ff,1
+s-kagan       | c,6 r,3 cm,3        | c,5 r,2 cm,4        | c,5 r,3 cm,3        | c,5 r,1 cm,4        | -                    | c,5 r,2 cm,3
+s-koneko      | c,9 v,5 pp,4        | c,9 v,6 pp,3        | -                   | c,9 v,6 pp,4        | c,8 v,7 pp,3         | c,9 v,7 pp,4
+s-gamer       | b,8 c,3 fm,5 cm,4   | b,8 c,6 fm,4 cm,2   | b,8 c,4 fm,5 cm,3   | b,11 c,2 cm,4 fm,3  | -                    | c,5 b,9 cm,3 fm,3
+s-mighty      | -                   | -                   | v,14 c,4            | -                   | -                    | -
+s-kairoh      | -                   | -                   | -                   | -                   | f,12 fm,8            | -
+g-hardcore    | -                   | -                   | -                   | -                   | b,10 r,10            | -
+g-casual      | -                   | -                   | -                   | -                   | f,12 v,3             | -
+g-axe         | -                   | -                   | -                   | -                   | b,7 fm,6             | -
+g-metal       | -                   | -                   | -                   | -                   | r,7 cm,5             | -
+b-rush        | -                   | -                   | -                   | -                   | r,10 pp,4            | -
+b-chill       | -                   | -                   | -                   | -                   | c,10 pp,4            | -
+b-vibe        | -                   | -                   | -                   | -                   | v,10 pp,4            | -
+b-flow        | -                   | -                   | -                   | -                   | f,10 pp,4            | -
+b-beat        | -                   | -                   | -                   | -                   | b,10 pp,4            | -
+e-poppy       | f,10 r,8 pp,5       | -                   | -                   | f,10 r,5 pp,6       | -                    | f,10 r,6 pp,6
+e-rutra       | -                   | -                   | -                   | r,10 cm,5           | -                    | -
+e-riran       | -                   | r,13 b,5 cm,4 ft,3  | -                   | -                   | -                    | -
+e-viyella     | b,14 ff,3 fm,4      | -                   | -                   | -                   | -                    | -
+e-goldn       | c,8 f,10 ff,3 ft,3  | -                   | -                   | -                   | -                    | -
+e-lisa        | c,12 r,4 cm,4 ft,3  | -                   | -                   | -                   | -                    | -
+e-slynk       | v,10 f,7 fm,3 ft,2  | -                   | -                   | v,12 f,5 fm,3 ft,3  | -                    | v,11 f,6 ft,3 fm,2
+e-kepo        | c,11 r,8 cm,5       | -                   | -                   | -                   | -                    | -
+e-garcello    | v,10 f,8 ft,4       | -                   | -                   | -                   | -                    | -
+e-tobu        | -                   | -                   | v,6 r,8 cm,3 fm,4   | -                   | -                    | -
+e-christmas   | f,8 r,8 cm,5        | -                   | r,9 b,7 ft,5        | -                   | -                    | -
+e-coach cv    | c,10 v,7 fm,5       | -                   | -                   | -                   | -                    | -
+e-coach fv    | f,12 v,4 fm,3       | -                   | -                   | f,11 v,7 fm,4       | -                    | f,10 v,7 fm,5
+e-coach cr    | c,10 r,8 cm,3       | -                   | -                   | c,11 r,7 cm,6       | -                    | c,11 r,7 cm,5
+e-landino     | c,11 v,8 pp,2       | c,10 v,4 pp,4       | -                   | c,11 f,9 pp,4       | -                    | c,11 f,8 pp,4
+e-kurante     | b,7 v,7 cm,4 pp,1   | -                   | -                   | b,8 v,8 cm,6 pp,1   | b,8 v,8 pp,2 cm,4    | b,7 v,6 cm,5 fm,1
+e-witch       | c,8 f,10 ff,3 ft,3  | -                   | -                   | -                   | -                    | -
+e-creo        | -                   | -                   | -                   | c,10 r,7 pp,4 cm,3  | -                    | -
+e-captain     | f,10 r,7 cm,5 fm,3  | -                   | -                   | -                   | -                    | -
+e-shaii       | f,12 v,5 fm,4 ft,3  | -                   | -                   | -                   | f,13 v,4 fm,3 ft,4   | -
+e-roxie       | v,10 r,8 ff,4       | -                   | v,11 r,7 fm,4       | v,8 r,11 ft,4       | -                    | v,7 r,12 cm,4
+e-pink        | -                   | -                   | -                   | -                   | v,10 c,7 ft,4 fm,2   | -
+e-boyfriend   | b,6 f,4 ff,4        | -                   | -                   | -                   | -                    | -
+e-girlfriend  | c,6 f,4 ft,4        | -                   | -                   | -                   | -                    | -
+e-restriction | r,12 f,5 cm,2 ft,4  | -                   | r,11 f,6 cm,4 ft,2  | -                   | -                    | -
+e-reku        | v,12 c,5 cm,4 ff,1  | -                   | -                   | -                   | -                    | -
+e-ushi        | b,12 v,5 cm,3 fm,3  | -                   | -                   | -                   | -                    | -
+e-ardolf      | f,10 b,7 ff,5       | -                   | -                   | f,11 b,6 fm,5       | f,12 b,5 ft,5        | -

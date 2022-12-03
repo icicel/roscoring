@@ -6,17 +6,20 @@ import settings
 
 ### PROCESS DATA
 
+# note to self: https://plaintexttools.github.io/plain-text-table/ when creating data
+
 # create gears
 # sources:
 # legendary gear: https://gyazo.com/88629460c091fcf444dbc1e20d06021f
 # rare gear: https://gyazo.com/18b5c3dcd905cff7d8300917e9a53b2e
 # shop and event gear: https://docs.google.com/document/d/1h3K3prLtUAKS0EYf8pcuvQsw6Ky33T9FjDbW7Bgzni4
 # thanks to thestaticbro, vkess, samkoopayyy, 789legendary987 and robeatsgearmaster for these
-gear_input = open("rodata/gears.txt", "r").read().split("\n")[1:]
+gear_input = open("rodata/gears.txt", "r").read().split("\n")[1:-1]
 gears = {}
 for gear_set in gear_input:
-    lines = gear_set.split("\t")
-    name = lines[0] if lines[0][:2] in ["r-", "l-", "b-", "g-"] else lines[0][2:]
+    lines = gear_set.split("|")
+    name = lines[0].strip()
+    name = name if name[:2] in ["r-", "l-", "b-", "g-"] else name[2:]
     geartype = lines[0][:2]
     if (((geartype == "r-" and settings.use_rare_color_gear)
     or (geartype == "l-" and settings.use_legendary_color_gear)
@@ -29,65 +32,67 @@ for gear_set in gear_input:
     or settings.use_owned_gear:
         gears[name] = []
         for gear in lines[1:]:
-            if gear: # can be empty line
-                if gear != "-":
-                    x = []
-                    for stat in gear.split(" "):
-                        stat = stat.split(",")
-                        x.append((stat[0], int(stat[1])))
-                    gears[name].append(x)
-                else:
-                    gears[name].append(None)
+            if gear != "-":
+                x = []
+                for stat in gear.strip().split(" "):
+                    (stat, value) = stat.split(",")
+                    x.append((stat, int(value)))
+                gears[name].append(x)
+            else:
+                gears[name].append(None)
 
 # create gear material costs
-cost_input = open("rodata/costs.txt", "r").read().split("\n")[1:]
+cost_input = open("rodata/costs.txt", "r").read().split("\n")[1:-1]
 material_costs = {}
 for gear_set in cost_input:
-    lines = gear_set.split("\t")
+    lines = gear_set.split("|")
     name = lines[0]
     material_costs[name] = []
     for gear in lines[1:]:
-        if gear:
-            x = []
-            for material in gear.split(" "):
-                material = material.split(",")
-                x.append((material[0], int(material[1])))
-            material_costs[name].append(x)
+        x = []
+        for material in gear.strip().split(" "):
+            (material, amount) = material.split(",")
+            x.append((material, int(amount)))
+        material_costs[name].append(x)
 
 # create material price in coins
 # from https://docs.google.com/document/d/1AvRHLc-zukyuA0fnEKWvkDz5_PVG3Ci_NScnh2SZJiI
 # thanks to tishi for organizing that
-price_input = open("rodata/prices.txt", "r").read().split("\n")[1:]
+price_input = open("rodata/prices.txt", "r").read().split("\n")[1:-1]
 material_price = {}
 for line in price_input:
-    line = line.split("\t")
-    material_price[line[0]] = int(line[-1])
+    line = line.split("|")
+    material = line[0].strip()
+    price = line[1].strip()
+    material_price[material] = int(price)
 
 # create minis
-mini_input = open("rodata/minis.txt", "r").read().split("\n")[1:]
+mini_input = open("rodata/minis.txt", "r").read().split("\n")[1:-1]
 minis = {}
 mini_level = 1 if settings.mini_level < 1 else settings.mini_level
 mini_level = 50 if mini_level > 50 else int(mini_level)
 for line in mini_input:
-    line = [c for c in line.split("\t") if c]
+    line = line.split("|")
     output = []
     cmult = math.floor(1 + 1.5 * (mini_level - 1) / 19) if mini_level < 20 else math.floor(2.5 + 2.5 * (mini_level - 20) / 30)
     smult = 1 if mini_level < 20 else math.floor((mini_level - 1) / 10)
-    for y in line[1].split(" "):
+    for y in line[1].strip().split(" "):
         y = y.split(",")
         output.append((y[0], int(int(y[1]) * cmult)))
-    for y in line[2].split(" "):
+    for y in line[2].strip().split(" "):
         y = y.split(",")
         output.append((y[0], int(int(y[1]) * smult)))
-    minis[line[0]] = output
+    minis[line[0].strip()] = output
 mini_list = list(minis.keys())
 
 # create upgrades
-upgrade_input = open("rodata/upgrades.txt", "r").read().split("\n")[1:]
+upgrade_input = open("rodata/upgrades.txt", "r").read().split("\n")[1:-1]
 upgrades = {}
 for line in upgrade_input:
-    line = line.split("\t")
-    upgrades[line[0]] = [(y.split(",")[0], int(y.split(",")[1])) for y in line[-1].split(" ")]
+    line = line.split("|")
+    upgrade = line[0].strip()
+    stats = line[1].strip()
+    upgrades[upgrade] = [(y.split(",")[0], int(y.split(",")[1])) for y in stats.split(" ")]
 upgrade_list = list(upgrades.keys())
 
 # create owned gear
@@ -95,13 +100,13 @@ if settings.use_owned_gear:
     owned_gears = {}
     for gear_set in gears:
         owned_gears[gear_set] = [None, None, None, None, None, None]
-    owned_input = open("rodata/owned.txt", "r").read().split("\n")[1:]
+    owned_input = open("rodata/owned.txt", "r").read().split("\n")[1:-1]
     for line in owned_input:
-        line = [i for i in line.split("\t") if i]
-        slot = {"hat": 0, "neck": 1, "face": 2, "shirt": 3, "back": 4, "pants": 5}[line[0]]
-        gear_set = line[1]
+        line = line.split("|")
+        slot = {"hat": 0, "neck": 1, "face": 2, "shirt": 3, "back": 4, "pants": 5}[line[0].strip()]
+        gear_set = line[1].strip()
         if len(line) > 2:
-            gear_upgrades = line[2].split(",")
+            gear_upgrades = line[2].strip().split(",")
         else:
             gear_upgrades = []
         gear_stats = {}
@@ -123,14 +128,11 @@ if settings.use_owned_gear:
 # stats go from +80 to +0 (for reasons)
 # values are from https://docs.google.com/spreadsheets/d/15Rqlh579x2V7gMRFIai-cDQtGYgeMFehLBWWwekpDSU
 # humongous thanks to lydiaplayz for that document! it's literally the backbone of this calculator
-stat_input = open("rodata/stats.txt", "r").read().split("\n")[1:].__reversed__()
+stat_input = open("rodata/stats.txt", "r").read().split("\n")[1:-1].__reversed__()
 stat_value = {"pp": [], "ff": [], "ft": [], "fm": [], "cm": []}
 stat_list = []
 for line in stat_input:
-    newline = []
-    for r in line.split("\t"):  # remove empty columns (double tabs)
-        if r: newline.append(r)
-    stat_list.append([float(s) for s in newline])
+    stat_list.append([float(s.strip()) for s in line.split("|")])
 if settings.formulaic_stats:
     pp_coefs = poly.fit(range(81), [l[0] for l in stat_list], settings.polynomial_degree).convert().coef
     ff_coefs = poly.fit(range(81), [l[1] for l in stat_list], settings.polynomial_degree).convert().coef

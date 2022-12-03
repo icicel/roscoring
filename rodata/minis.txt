@@ -1,41 +1,41 @@
-name				stats (color)	stats (gear)
-helpful alien			r,10 f,5	cm,5
-valentine's lisa		c,12 r,7	ft,6
-similar outskirts		b,10 c,5	fm,5
-tower heroes wizard		v,10 f,5	cm,5
-tower heroes mirai		f,12 r,7	fm,6
-i re:s				c,10 f,5	ft,5
-ponchi				f,10 c,5	cm,5
-camellia			b,10 r,5	ff,5
-waterflame			v,10 c,5	ft,5
-birthday alien			r,12 f,7	cm,6
-okuu				r,10 f,5	cm,6
-24kgoldn			f,12 c,7	cm,6
-hyper potions shiba		v,10 b,5	fm,5
-arforest			f,10 v,5	ff,5
-asteroid's dream		c,10 b,5	ft,5
-kurokotei			r,10 b,5	cm,5
-viyella				b,10 f,5	fm,5
-james landino			v,13		ff,4
-t0y0u				r,10 f,5	cm,5
-undead corporation akemi	b,13		ff,5
-riran				r,13		fm,5
-shaii				f,13		ft,5
-kurante-chan			r,11 v,3	cm,6
-kurante metal dimensions	r,14 v,4	cm,8
-maliboux			c,10 r,5	ff,5
-ringmaster roxie		v,13 r,7	fm,6
-slushii				v,10 f,5	cm,5
-monstercat			c,13 f,7	cm,6
-whipped cream			f,10 c,5	ft,5
-boyfriend			b,11 f,4	ff,5
-girlfriend			c,12 f,8	ft,6
-team grimoire			b,13		fm,5
-f-777				v,11 f,3	ft,6
-se-u-ra				f,11 r,3	ft,6
-creo				c,11 b,3	fm,6
-rutra				r,11 b,3	cm,6
-dark cat			b,11 v,3	ff,5
-reku mochizuki			v,11 c,3	cm,5
-ushi-chan			b,11 v,3	ft,6
-ardolf				f,11 b,3	fm,6
+name                     | stats (color) | stats (gear)
+helpful alien            | r,10 f,5      | cm,5
+valentine's lisa         | c,12 r,7      | ft,6
+similar outskirts        | b,10 c,5      | fm,5
+tower heroes wizard      | v,10 f,5      | cm,5
+tower heroes mirai       | f,12 r,7      | fm,6
+i re:s                   | c,10 f,5      | ft,5
+ponchi                   | f,10 c,5      | cm,5
+camellia                 | b,10 r,5      | ff,5
+waterflame               | v,10 c,5      | ft,5
+birthday alien           | r,12 f,7      | cm,6
+okuu                     | r,10 f,5      | cm,6
+24kgoldn                 | f,12 c,7      | cm,6
+hyper potions shiba      | v,10 b,5      | fm,5
+arforest                 | f,10 v,5      | ff,5
+asteroid's dream         | c,10 b,5      | ft,5
+kurokotei                | r,10 b,5      | cm,5
+viyella                  | b,10 f,5      | fm,5
+james landino            | v,13          | ff,4
+t0y0u                    | r,10 f,5      | cm,5
+undead corporation akemi | b,13          | ff,5
+riran                    | r,13          | fm,5
+shaii                    | f,13          | ft,5
+kurante-chan             | r,11 v,3      | cm,6
+kurante metal dimensions | r,14 v,4      | cm,8
+maliboux                 | c,10 r,5      | ff,5
+ringmaster roxie         | v,13 r,7      | fm,6
+slushii                  | v,10 f,5      | cm,5
+monstercat               | c,13 f,7      | cm,6
+whipped cream            | f,10 c,5      | ft,5
+boyfriend                | b,11 f,4      | ff,5
+girlfriend               | c,12 f,8      | ft,6
+team grimoire            | b,13          | fm,5
+f-777                    | v,11 f,3      | ft,6
+se-u-ra                  | f,11 r,3      | ft,6
+creo                     | c,11 b,3      | fm,6
+rutra                    | r,11 b,3      | cm,6
+dark cat                 | b,11 v,3      | ff,5
+reku mochizuki           | v,11 c,3      | cm,5
+ushi-chan                | b,11 v,3      | ft,6
+ardolf                   | f,11 b,3      | fm,6

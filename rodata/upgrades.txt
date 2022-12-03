@@ -1,11 +1,11 @@
-upgrade	stats
-b	b,6
-c	c,6
-cm	f,3 cm,2
-ff	ff,3 v,3
-fm	fm,3 r,3
-ft	b,3 ft,3
-f	f,6
-pp	c,3 pp,2
-r	r,6
-v	v,6
+upgrade | stats
+b       | b,6
+c       | c,6
+cm      | f,3 cm,2
+ff      | ff,3 v,3
+fm      | fm,3 r,3
+ft      | b,3 ft,3
+f       | f,6
+pp      | c,3 pp,2
+r       | r,6
+v       | v,6
