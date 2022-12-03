@@ -32,10 +32,11 @@ for gear_set in gear_input:
     or settings.use_owned_gear:
         gears[name] = []
         for gear in lines[1:]:
+            gear = gear.strip()
             if gear != "-":
                 x = []
-                for stat in gear.strip().split(" "):
-                    (stat, value) = stat.split(",")
+                for item in gear.split(" "):
+                    (stat, value) = item.split(",")
                     x.append((stat, int(value)))
                 gears[name].append(x)
             else:
@@ -50,8 +51,8 @@ for gear_set in cost_input:
     material_costs[name] = []
     for gear in lines[1:]:
         x = []
-        for material in gear.strip().split(" "):
-            (material, amount) = material.split(",")
+        for item in gear.strip().split(" "):
+            (material, amount) = item.split(",")
             x.append((material, int(amount)))
         material_costs[name].append(x)
 
@@ -69,20 +70,26 @@ for line in price_input:
 # create minis
 mini_input = open("rodata/minis.txt", "r").read().split("\n")[1:-1]
 minis = {}
-mini_level = 1 if settings.mini_level < 1 else settings.mini_level
-mini_level = 50 if mini_level > 50 else int(mini_level)
+mini_level = settings.mini_level
 for line in mini_input:
     line = line.split("|")
+    name = line[0].strip()
+    stats_color = line[1].strip()
+    stats_gear = line[2].strip()
     output = []
-    cmult = math.floor(1 + 1.5 * (mini_level - 1) / 19) if mini_level < 20 else math.floor(2.5 + 2.5 * (mini_level - 20) / 30)
-    smult = 1 if mini_level < 20 else math.floor((mini_level - 1) / 10)
-    for y in line[1].strip().split(" "):
-        y = y.split(",")
-        output.append((y[0], int(int(y[1]) * cmult)))
-    for y in line[2].strip().split(" "):
-        y = y.split(",")
-        output.append((y[0], int(int(y[1]) * smult)))
-    minis[line[0].strip()] = output
+    if mini_level < 20:
+        level_mult = 1 + 1.5 * (mini_level - 1) / 19
+        rank_mult = 1
+    else:
+        level_mult = 2.5 + 2.5 * (mini_level - 20) / 30
+        rank_mult = math.floor((mini_level - 1) / 10)
+    for item in stats_color.split(" "):
+        (stat, value) = item.split(",")
+        output.append((stat, math.floor(int(value) * level_mult)))
+    for item in stats_gear.split(" "):
+        (stat, value) = item.split(",")
+        output.append((stat, int(value) * rank_mult))
+    minis[name] = output
 mini_list = list(minis.keys())
 
 # create upgrades
@@ -92,7 +99,11 @@ for line in upgrade_input:
     line = line.split("|")
     upgrade = line[0].strip()
     stats = line[1].strip()
-    upgrades[upgrade] = [(y.split(",")[0], int(y.split(",")[1])) for y in stats.split(" ")]
+    x = []
+    for item in stats.split(" "):
+        (stat, value) = item.split(",")
+        x.append((stat, int(value)))
+    upgrades[upgrade] = x
 upgrade_list = list(upgrades.keys())
 
 # create owned gear
@@ -105,22 +116,20 @@ if settings.use_owned_gear:
         line = line.split("|")
         slot = {"hat": 0, "neck": 1, "face": 2, "shirt": 3, "back": 4, "pants": 5}[line[0].strip()]
         gear_set = line[1].strip()
-        if len(line) > 2:
-            gear_upgrades = line[2].strip().split(",")
-        else:
-            gear_upgrades = []
+        gear_upgrades = line[2].strip()
         gear_stats = {}
         for stat, value in gears[gear_set][slot]:
             if stat in gear_stats:
                 gear_stats[stat] += value
             else:
                 gear_stats[stat] = value
-        for upgrade in gear_upgrades:
-            for stat, value in upgrades[upgrade]:
-                if stat in gear_stats:
-                    gear_stats[stat] += value
-                else:
-                    gear_stats[stat] = value
+        if gear_upgrades != "-":
+            for upgrade in gear_upgrades.split(","):
+                for stat, value in upgrades[upgrade]:
+                    if stat in gear_stats:
+                        gear_stats[stat] += value
+                    else:
+                        gear_stats[stat] = value
         owned_gears[gear_set][slot] = [(stat, gear_stats[stat]) for stat in gear_stats.keys()]
     gears = owned_gears
 
@@ -132,7 +141,8 @@ stat_input = open("rodata/stats.txt", "r").read().split("\n")[1:-1].__reversed__
 stat_value = {"pp": [], "ff": [], "ft": [], "fm": [], "cm": []}
 stat_list = []
 for line in stat_input:
-    stat_list.append([float(s.strip()) for s in line.split("|")])
+    line = line.split("|")
+    stat_list.append([float(value.strip()) for value in line])
 if settings.formulaic_stats:
     pp_coefs = poly.fit(range(81), [l[0] for l in stat_list], settings.polynomial_degree).convert().coef
     ff_coefs = poly.fit(range(81), [l[1] for l in stat_list], settings.polynomial_degree).convert().coef
@@ -150,17 +160,23 @@ for line in stat_list:
         ft = float(line[3])
     fm = float(line[2])
     cm = float(line[4])
+    perfect_acc = settings.perfect_accuracy
+    great_acc = 1 - perfect_acc
+    hit_count = settings.song_hit_count
+    ln_count = settings.song_ln_count
+    note_count = hit_count - ln_count
+    length = settings.song_length
     # we can save time on a bunch of calculations by doing them outside the loop, here!
     # Average Accuracy Points = <Perfect Points> * Perfect Accuracy + 150 * Great Accuracy
-    stat_value["pp"].append(pp * settings.perfect_accuracy + 150 * settings.great_accuracy)
+    stat_value["pp"].append(pp * perfect_acc + 150 * great_acc)
     # Fever Fill Time = ( (Song Note Count / 3) / ((Perfect Accuracy + 0.5 * Great Accuracy) / <Fever Fill Rate>) ) / Song Hit Density
-    stat_value["ff"].append(((settings.song_note_count / 3) / ((settings.perfect_accuracy + 0.5 * settings.great_accuracy) / ff)) / (settings.song_hit_count / settings.song_length))
+    stat_value["ff"].append(((note_count / 3) / ((perfect_acc + 0.5 * great_acc) / ff)) / (hit_count / length))
     # this is just <Fever Multiplier> though
     stat_value["fm"].append(fm)
     # Effective Fever Time = Song Length * (<Fever Time> * 0.16/1.67 + 0.0435)
-    stat_value["ft"].append(settings.song_length * (ft * 0.16/1.67 + 0.0435))
+    stat_value["ft"].append(length * (ft * 0.16/1.67 + 0.0435))
     # Average Combo Multiplier = ( (49.5  + Song Hit Count) * (<Combo Multiplier> - 1) + Song Hit Count ) / Song Hit Count
-    stat_value["cm"].append(((49.5 + settings.song_hit_count) * (cm - 1) + settings.song_hit_count) / settings.song_hit_count)
+    stat_value["cm"].append(((49.5 + hit_count) * (cm - 1) + hit_count) / hit_count)
 
 # we calculate song fever percentage for all possible combinations of fever fill time and effective fever time beforehand
 # this way, we don't have to repeat the super-slow division operations (integer division?! yucky!!) 250k times

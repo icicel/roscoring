@@ -12,7 +12,7 @@ use_unobtainable_gear = True # will not ignore sets defined below
 unobtainable_sets = ["e-poppy"] # not exhaustive
 upgrades_per_gear_set = 90 # 0 = no upgrades, 6 = 1 per slot, 30 = 5 per slot, 90 = 15 per slot etc.
 use_owned_gear = True # restricts selection to gear defined in owned.txt
-mini_level = 20 # rank is calculated automatically
+mini_level = 20 # ranges from 1 to 50, rank is calculated automatically
 
 ### PROGRAM SETTINGS
 memory_saver = True # uses a modified method to create gear combinations in case you run into memory problems
@@ -20,16 +20,14 @@ debug = False # prints debug info and quits
 timer = False # times the main loop
 
 ### GAMEPLAY SETTINGS
-# percentage of hits that are Greats (the program assumes no Oks or Misses)
-# only values above 0.05 have a significant impact
-great_accuracy = 0
-perfect_accuracy = 1 - great_accuracy
+# percentage of hits that are Perfects (the program assumes no Oks or Misses)
+# only values below 0.95 have a significant impact
+perfect_accuracy = 1
 
 ### SONG SETTINGS
 song_length = 135 # from first note to last note
 song_hit_count = 177 # Perfects + Greats
 song_ln_count = 10 # just count them manually lol
-song_note_count = song_hit_count - song_ln_count # aka tap count + ln count
 # here's some predefined songs for ya:
 # strawberry sherbet (easy) - length 135, hits 177, lns 10
 # be my time machine (hard) - length 127, hits 1502, lns 255
