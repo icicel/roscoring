@@ -44,3 +44,4 @@ seatrus                  | f,10 r,6      | ft,6
 halloween witch teresa   | b,13 f,7      | cm,6
 slynk                    | f,11 v,5      | fm,6
 tv room                  | v,12 r,4      | ft,4
+schoolgirl marie         | c,12 b,8      | fm,6
