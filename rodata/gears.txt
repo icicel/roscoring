@@ -62,3 +62,4 @@ event      | ardolf      | f,10 b,7 ff,5       | -                   | -        
 event      | maxzy       | -                   | -                   | c,10 v,7 cm,5 ff,3  | -                   | -                    | - 
 event      | tv room     | v,12 r,7 cm,2 ft,3  | -                   | -                   | -                   | -                    | -
 event      | schoolgirl  | -                   | c,11 b,8 ff,2 fm,3  | -                   | -                   | -                    | -
+event      | kobaryo     | r,9 f,8 ft,4        | -                   | r,10 f,7 fm,3 cm,2  | r,11 f,6 ft,3 fm,3  | -                    | r,12 f,6 ff,3 cm,3
