@@ -1,3 +1,4 @@
+from os import kill
 from numpy.polynomial.polynomial import Polynomial as poly
 from datetime import datetime as dt
 import settings
@@ -230,12 +231,51 @@ def get_score(current_stats, increase=None):
 
 # does there exist a combination which is better/worse in all stats?
 def consider_combination(combination):
-    combinations.append(combination)
+    global add_count, reject_count, death_count
+    gear_stats = get_stats(combination)
+    deathlist = []
+    for c in range(len(combinations)):
+        input_worse = True
+        any_worse = True
+        for stat, value in combinations_stats[c]:
+            if input_worse:
+                if gear_stats[stat] > value:
+                    input_worse = False
+                    if not any_worse: # break if there's no further need to loop through these stats
+                        break
+            if any_worse:
+                if gear_stats[stat] < value:
+                    any_worse = False
+                    if not input_worse:
+                        break
+        if input_worse: # if the input combination is better than combination[c] in NO stat
+            reject_count += 1
+            break
+        if any_worse: # if combination[c] is better than the input combination in NO stat
+            deathlist.append(c)
+            # we don't break the for loop here, as there could be more combinations that would fall on the deathlist
+
+    else: # the combination made it through the for loop without it breaking (= being worse than any combination[c])
+        for victim in deathlist[::-1]: # KILL KILL KILL
+            combinations.pop(victim)
+            combinations_stats.pop(victim)
+            death_count += 1
+        combinations.append(combination)
+        combinations_stats.append(gear_stats.items())
+        add_count += 1
 
 # create all combinations of gear
-def gear_combinations(cur=None, slot=0):
-    if cur is None:
-        cur = []
+def gear_combinations_memory_saver(slot, cur=[]):
+    global add_count, reject_count, death_count
+    for gear_set in gears:
+        if gears[gear_set][slot]:
+            print(str(len(combinations)), str(add_count - death_count), str(reject_count), str(death_count), gear_set, sep="\t")
+            add_count = 0
+            reject_count = 0
+            death_count = 0
+            for old_combination in old_combinations:
+                consider_combination(old_combination + [gear_set])
+def gear_combinations(cur=[], slot=0):
     if slot != 5:
         for gear_set in gears:
             if gears[gear_set][slot]:
@@ -243,7 +283,7 @@ def gear_combinations(cur=None, slot=0):
     else:
         for gear_set in gears:
             if gears[gear_set][slot]:
-                consider_combination(cur + [gear_set])
+                combinations.append(cur + [gear_set])
 
 
 
@@ -272,16 +312,32 @@ for slot in range(6):
 print("Gear combination count: " + str(combinations_length))
 if settings.use_owned_gear:
     print("Predicted time per song color: " + prepare_time(230 * combinations_length) + " to " + prepare_time(260 * combinations_length))
-    print("Predicted time total: " + prepare_time(25 * 230 * combinations_length) + " to " + prepare_time(25 * 260 * combinations_length))
+    print("Predicted time all: " + prepare_time(25 * 230 * combinations_length) + " to " + prepare_time(25 * 260 * combinations_length))
 else:
     print("Predicted time per song color: " + prepare_time(2800 * combinations_length) + " to " + prepare_time(3100 * combinations_length))
-    print("Predicted time total: " + prepare_time(25 * 2800 * combinations_length) + " to " + prepare_time(25 * 3100 * combinations_length))
+    print("Predicted time all: " + prepare_time(25 * 2800 * combinations_length) + " to " + prepare_time(25 * 3100 * combinations_length))
 print("Base predicted score: " + str(int(base_score * settings.song_hit_count)))
 print("Combining gear...")
-combinations = []
 now = dt.now()
-gear_combinations()
-print("Combining gear time: " + str(dt.now() - now))
+if settings.memory_saver:
+    old_combinations = [[]]
+    old_combinations_stats = [{"r": 0, "c": 0, "v": 0, "f": 0, "b": 0, "fm": 0, "pp": 0, "ff": 0, "cm": 0, "ft": 0}]
+    add_count = 0
+    reject_count = 0
+    death_count = 0
+    for slot in range(6):
+        combinations = []
+        combinations_stats = []
+        gear_combinations_memory_saver(slot)
+        print("Slot " + str(slot) + " completed! Combinations count: " + str(len(combinations)))
+        old_combinations = combinations
+        old_combinations_stats = combinations_stats
+    print("Combining gear time: " + str(dt.now() - now))
+    print("New gear combination count: " + str(len(combinations)))
+else:
+    combinations = []
+    gear_combinations()
+    print("Combining gear time: " + str(dt.now() - now))
 if settings.debug:
     print(gears)
     print(material_costs)
