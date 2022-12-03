@@ -1,6 +1,7 @@
 from os import kill
 from numpy.polynomial.polynomial import Polynomial as poly
 from datetime import datetime as dt
+import math
 import settings
 
 ### PROCESS DATA
@@ -62,16 +63,16 @@ for line in price_input:
     line = line.split("\t")
     material_price[line[0]] = int(line[-1])
 
-# create minis. all stats are for max level but since they scale slowly and linearly (?) it should hold for lower levels
+# create minis
 mini_input = open("rodata/minis.txt", "r").read().split("\n")[1:]
 minis = {}
-mini_level = 0 if settings.mini_level < 0 else settings.mini_level
+mini_level = 1 if settings.mini_level < 1 else settings.mini_level
 mini_level = 50 if mini_level > 50 else int(mini_level)
 for line in mini_input:
     line = [c for c in line.split("\t") if c]
     output = []
-    cmult = 1 + 1.5 * mini_level / 20 if mini_level < 20 else 2.5 + 2.5 * (mini_level - 20) / 30
-    smult = 1 if mini_level < 20 else int(mini_level / 10 - 0.6)
+    cmult = math.floor(1 + 1.5 * (mini_level - 1) / 19) if mini_level < 20 else math.floor(2.5 + 2.5 * (mini_level - 20) / 30)
+    smult = 1 if mini_level < 20 else math.floor((mini_level - 1) / 10)
     for y in line[1].split(" "):
         y = y.split(",")
         output.append((y[0], int(int(y[1]) * cmult)))
