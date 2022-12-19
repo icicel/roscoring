@@ -46,3 +46,4 @@ slynk                    | f,11 v,5      | fm,6
 tv room                  | v,12 r,4      | ft,4
 schoolgirl marie         | c,12 b,8      | fm,6
 kobaryo                  | r,11 f,3      | cm,6
+make a cake chef         | b,13 r,5      | ff,7
