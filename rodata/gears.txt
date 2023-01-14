@@ -48,12 +48,12 @@ event      | coach (fv)        | f,12 v,4 fm,3       | -                   | -  
 event      | coach (cr)        | c,10 r,8 cm,3       | -                   | -                   | c,11 r,7 cm,6       | -                    | c,11 r,7 cm,5
 event      | landino           | c,11 v,8 pp,2       | c,10 v,4 pp,4       | -                   | c,11 f,9 pp,4       | -                    | c,11 f,8 pp,4
 event      | kurante           | b,7 v,7 cm,4 pp,1   | -                   | -                   | b,8 v,8 cm,6 pp,1   | b,8 v,8 pp,2 cm,4    | b,7 v,6 cm,5 fm,1
-event      | halloween witch   | c,8 f,10 ff,3 ft,3  | c,9 f,9 ff,2 ft,4   | -                   | -                   | -                    | c,7 f,11 ff,4 ft,2
+event      | witch             | c,8 f,10 ff,3 ft,3  | c,9 f,9 ff,2 ft,4   | -                   | -                   | -                    | c,7 f,11 ff,4 ft,2
 event      | creo              | -                   | -                   | -                   | c,10 r,7 pp,4 cm,3  | -                    | -
 event      | captain           | f,10 r,7 cm,5 fm,3  | -                   | -                   | -                   | -                    | -
 event      | shaii             | f,12 v,5 fm,4 ft,3  | -                   | -                   | -                   | f,13 v,4 fm,3 ft,4   | -
-event      | ringmaster roxie  | v,10 r,8 ff,4       | -                   | v,11 r,7 fm,4       | v,8 r,11 ft,4       | -                    | v,7 r,12 cm,4
-event      | g-pink electric   | -                   | -                   | -                   | -                   | v,10 c,7 ft,4 fm,2   | -
+event      | roxie             | v,10 r,8 ff,4       | -                   | v,11 r,7 fm,4       | v,8 r,11 ft,4       | -                    | v,7 r,12 cm,4
+event      | g-pink            | -                   | -                   | -                   | -                   | v,10 c,7 ft,4 fm,2   | -
 event      | boyfriend         | b,6 f,4 ff,4        | -                   | -                   | -                   | -                    | -
 event      | girlfriend        | c,6 f,4 ft,4        | -                   | -                   | -                   | -                    | -
 event      | restriction       | r,12 f,5 cm,2 ft,4  | -                   | r,11 f,6 cm,4 ft,2  | -                   | -                    | -
