@@ -69,3 +69,4 @@ event      | santa's helper    | v,14 f,12 ft,3      | -                   | -  
 event      | new year's        | -                   | c,15 v,11 fm,3      | -                   | -                   | -                    | -
 event      | sound space       | f,12 c,8 fm,4 ft,5  | -                   | -                   | -                   | -                    | -
 event      | silentroom        | -                   | -                   | -                   | -                   | c,15 ff,3 ft,4       | -
+event      | cametek           | b,12 r,6 ff,4 ft,2  | -                   | -                   | -                   | -                    | -
