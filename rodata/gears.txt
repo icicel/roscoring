@@ -71,3 +71,4 @@ event      | sound space       | f,12 c,8 fm,4 ft,5  | -                   | -  
 event      | silentroom        | -                   | -                   | -                   | -                   | c,15 ff,3 ft,4       | -
 event      | cametek           | b,12 r,6 ff,4 ft,2  | -                   | -                   | -                   | -                    | -
 event      | valentine         | -                   | -                   | -                   | -                   | r,18 cm,4 ft,4       | -
+event      | t+pazolite        | -                   | v,13 b,6 ff,4       | -                   | -                   | -                    | -
