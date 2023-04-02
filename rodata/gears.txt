@@ -47,7 +47,7 @@ event      | coach (cv)        | c,10 v,7 fm,5       | -                   | -  
 event      | coach (fv)        | f,12 v,4 fm,3       | -                   | -                   | f,11 v,7 fm,4       | -                    | f,10 v,7 fm,5
 event      | coach (cr)        | c,10 r,8 cm,3       | -                   | -                   | c,11 r,7 cm,6       | -                    | c,11 r,7 cm,5
 event      | landino           | c,11 v,8 pp,2       | c,10 v,4 pp,4       | -                   | c,11 f,9 pp,4       | -                    | c,11 f,8 pp,4
-event      | kurante           | b,7 v,7 cm,4 pp,1   | -                   | -                   | b,8 v,8 cm,6 pp,1   | b,8 v,8 pp,2 cm,4    | b,7 v,6 cm,5 fm,1
+event      | kurante           | b,7 v,7 cm,4 pp,1   | -                   | -                   | b,8 v,8 cm,6        | b,8 v,8 pp,2 cm,4    | b,7 v,6 cm,5 fm,1
 event      | witch             | c,8 f,10 ff,3 ft,3  | c,9 f,9 ff,2 ft,4   | -                   | -                   | -                    | c,7 f,11 ff,4 ft,2
 event      | creo              | -                   | -                   | -                   | c,10 r,7 pp,4 cm,3  | -                    | -
 event      | captain           | f,10 r,7 cm,5 fm,3  | -                   | -                   | -                   | -                    | -
@@ -74,3 +74,4 @@ event      | valentine         | -                   | -                   | -  
 event      | t+pazolite        | -                   | v,13 b,6 ff,4       | -                   | -                   | -                    | -
 event      | leaf              | -                   | c,13 v,6 cm,4       | -                   | -                   | -                    | -
 event      | birthday alien    | r,14 f,6 ft,6       | -                   | -                   | -                   | -                    | -
+event      | arforest          | f,10 v,8 ff,3       | -                   | f,11 v,6 ff,4       | -                   | -                    | -
