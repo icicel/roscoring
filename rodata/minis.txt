@@ -54,3 +54,4 @@ t+pazolite               | v,12 b,3      | ff,6
 spring festival mattie   | b,12 c,8      | ft,7
 8-bit alien              | r,12 c,7      | cm,7
 hyun                     | c,13          | fm,8
+shiiu                    | r,12 f,4      | fm,6
