@@ -77,3 +77,4 @@ event      | birthday alien    | r,14 f,6 ft,6       | -                   | -  
 event      | arforest          | f,10 v,8 ff,3       | -                   | f,11 v,6 ff,4       | -                   | -                    | -
 event      | hyun              | -                   | -                   | c,11 f,9 fm,4       | -                   | -                    | -
 event      | shiiu             | r,13 f,6 fm,5       | r,14 f,4 fm,4       | -                   | -                   | -                    | -
+event      | chroma            | v,12 b,5 ff,4 fm,3  | -                   | -                   | -                   | -                    | -
