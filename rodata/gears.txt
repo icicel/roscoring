@@ -78,3 +78,4 @@ event      | arforest          | f,10 v,8 ff,3       | -                   | f,1
 event      | hyun              | -                   | -                   | c,11 f,9 fm,4       | -                   | -                    | -
 event      | shiiu             | r,13 f,6 fm,5       | r,14 f,4 fm,4       | -                   | -                   | -                    | -
 event      | chroma            | v,12 b,5 ff,4 fm,3  | -                   | -                   | -                   | -                    | -
+event      | kurokotei         | r,9 b,7 cm,5        | r,11 b,5 cm,4       | -                   | -                   | -                    | -
