@@ -58,3 +58,4 @@ shiiu                    | r,12 f,4      | fm,6
 chroma                   | v,11 b,3      | ff,6
 summertime zara          | c,8 v,12      | ff,7
 synthion                 | c,11 r,4      | fm,6
+emocosine                | b,11 r,4      | ff,5
