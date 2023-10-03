@@ -80,6 +80,8 @@ event      | shiiu             | r,13 f,6 fm,5       | r,14 f,4 fm,4       | -  
 event      | chroma            | v,12 b,5 ff,4 fm,3  | -                   | -                   | -                   | -                    | -
 event      | kurokotei         | r,9 b,7 cm,5        | r,11 b,5 cm,4       | -                   | -                   | -                    | -
 event      | garlagan          | f,6 r,12 cm,4       | -                   | -                   | -                   | -                    | -
+event      | akemi             | f,0                 | -                   | -                   | -                   | -                    | -
 event      | emocosine         | b,12 r,6 cm,5       | -                   | -                   | -                   | -                    | -
+event      | flamingo          | f,0                 | -                   | -                   | -                   | -                    | -
 event      | bossfight         | -                   | -                   | f,15 v,5 ff,4       | -                   | -                    | -
 event      | party mode        | c,15 r,4 cm,4       | -                   | -                   | -                   | -                    | -
