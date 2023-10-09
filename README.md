@@ -1,17 +1,129 @@
-# Roscoring
+This tool calculates the optimal combination of gear,  upgrades and minis required to theoretically maximize score from any given Robeats song.
 
-This tool calculates the optimal combination of gear, gear upgrades and minis required to theoretically maximize score from any given Robeats song.
+Most of these formulas have been formulated through experimentation and some guessing.
+Expect that some may be incorrect.
 
-### Vocabulary
-*HIT* - An action that increases score. Single notes have one hit, long notes have two.
+# Basics
 
-*NOTE* - One singular instance of a note, can be single or long.
+Robeats is a vertically scrolling rhythm game with RPG mechanics.
 
-### Facts
+## Gear and stats
 
-- Combo is updated (that is, increased by one) BEFORE points are given for hitting.
-- All formulas may be completely wrong. Especially those involving Song Length and Song Note Count are guesswork.
-- ***This formatting*** means it's a gear stat
+
+
+There are six slots available for you to equip gear on
+
+
+# Scoring
+
+## Vocabulary
+
+*POINTS* - You gain this for hitting notes.
+
+*SCORE* - The total amount of points gained in a song.
+This is what this tool attempts to maximize.
+
+*NOTE* - One singular instance of a note.
+It can be a single note which merely requires pressing it at the right time, or an LN (long note) which you have to hold and release.
+
+*HIT* - An action that gives you points and increases score.
+Single notes have one hit (press), LNs have two hits (press *and* release).
+
+The distinction between a note and a hit is *very* important, and it has some funky consequences in Fever calculation as we will see later.
+
+## Raw points
+
+Raw points are purely the points gained from accuracy and color power, ignoring all multipliers.
+The amount of raw points gained per hit is:
+
+$$Raw Points = Color Points + \begin{cases}
+    Perfect Points &\text{if Perfect} \\
+    150 &\text{if Great} \\
+    100 &\text{if Ok}
+\end{cases}$$
+
+Color Points are calculated using the current song's Color.
+With no gear, it is equal to 0.
+
+$$Color Points = Primary Color Power * 2 + Secondary Color Power$$
+
+## Multipliers
+
+The Raw Points are multiplied with two multipliers, Current Combo Multiplier and Current Fever Multiplier (more on them later).
+This becomes the final point value added to the score.
+
+$$Points = Raw Points * Current Combo Multiplier * Current Fever Multiplier$$
+
+Keep in mind Current Combo/Fever Multiplier are distinct from the actual stats, Combo/Fever Multiplier!
+The stats can be thought of as "Max Combo/Fever Multiplier" to avoid confusion.
+
+
+# Combo
+
+$$Current Combo Multiplier = 1 + min(\frac{Combo}{100}, 1) * (Combo Multiplier - 1)$$
+
+Combo is updated (that is, increased by one) *before* points are given for hitting.
+
+
+# Fever
+
+While playing a song while making no mistakes, the Fever Bar will slowly fill up.
+Once it's full, a Fever activates and an additional multiplier is added to every points calculation.
+We can represent this mathematically:
+
+$$Current Fever Multiplier = \begin{cases}
+    Fever Multiplier &\text{if Fever active} \\
+    1 &\text{otherwise}
+\end{cases}$$
+
+## Building Fever
+
+In order to fill the Fever Bar, a certain amount of Fever Score must be generated.
+Every *hit* generates Fever Score based on accuracy:
+
+$$Fever Score = \begin{cases}
+    1 &\text{if Perfect} \\
+    1/2 &\text{if Great} \\
+    0 &\text{if Ok}
+\end{cases}$$
+
+The amount of Fever Score required for a Fever is calculated as such:
+
+$$Max Fever Score = \frac{Song Note Count}{3} * Fever Fill Rate$$
+
+Notice how Max Fever Score is calculated using the amount of *notes*, despite Fever Score being generated on *hits*.
+This explains a phenomenon where the Fever Bar is filled faster than usual on LN-heavy songs like Chiwawa and Small Theft Auto.
+As an LN counts as two hits, but only one note, the Max Fever Score ends up being very low compared to the amount of hits when there are many LNs.
+
+## Draining Fever
+
+$$Effective Fever Time = Fever Time * \frac{Song Length}{6}$$
+
+Fever Score drained per second:
+
+$$Song Note Count * \frac{2}{Fever Time * Song Length}$$
+
+Fever Score is also drained on Ok's and Misses as a one-time value.
+
+$$DrainedFeverScore = Max Fever Score * \begin{cases}
+    1/12 &\text{if Ok} \\
+    1/6 &\text{if Miss}
+\end{cases}$$
+
+**NOTE**: Further research is needed here. The exact proportions drained are currently rough estimates.
+
+
+# Accuracy
+
+Hit windows:
+> (base) Perfect - +40/-20, Great - +190/-95
+
+> (+80) Perfect - ?, Great - ?
+
+Accuracy percentage:
+> ( 200 * **Perfect Amount** + 150 * **Great Amount** + 100 * **Ok Amount** + 0 * **Miss Amount** ) / ( 200 * **Hit Count** )
+
+> **Raw Score** / **Maximum Raw Score**
 
 
 # Score formulas
@@ -87,53 +199,3 @@ This can't be the actual formula used in Robeats, can it??? The constants are so
 > **Perfect Accuracy** + 0.5 * **Great Accuracy**
 
 > (100% accuracy) 1
-
-
-
-# Building Fever
-
-Amount of Fever Score required for a Fever:
-> **Song Note Count** / 3
-
-Fever Score per hit:
-> BA * FR
-
-BA
-> 1 if Perfect, 1/2 if Great, 0 if Ok
-
-FR
-> 1 / ***Fever Fill Rate***
-
-Theory: Both hits (hit and release) of an LN gives Fever Score, despite LNs only counting as one note when calculating Song Note Count above.
-This would explain a phenomenon where the Fever Bar is filled faster than usual on LN-heavy songs like Chiwawa, Dubstepah and Small Theft Auto.
-Therefore, we need to distinguish between a "note" and a "hit".
-
-
-# Draining Fever
-
-Base Fever Time:
-> ***Fever Time*** * **Song Length** / 6
-
-Fever Score drained per second:
-> **Song Note Count** * 2 / (***Fever Time*** * **Song Length**)
-
-Fever Score drained per hit:
-> AQ * **Song Note Count** / 3
-
-AQ
-> 0 if Perfect or Great, 1/?? if Ok, 1/?? if Miss
-
-Theory: Both Miss and Ok remove a certain percentage of the full Fever bar (described above as AQ), maybe 1/10th for a Miss, for example. Further research needed!
-
-
-# Accuracy
-
-Hit windows:
-> (base) Perfect - +40/-20, Great - +190/-95
-
-> (+80) Perfect - ?, Great - ?
-
-Accuracy percentage:
-> ( 200 * **Perfect Amount** + 150 * **Great Amount** + 100 * **Ok Amount** + 0 * **Miss Amount** ) / ( 200 * **Hit Count** )
-
-> **Raw Score** / **Maximum Raw Score**
